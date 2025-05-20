@@ -2,39 +2,23 @@ import React, { useState } from 'react';
 import { Link } from 'react-router';
 
 const Login = () => {
-    const [formData, setFormData] = useState({
-        email: '',
-        password: ''
-    });
-
     const [errors, setErrors] = useState({});
     const [showPassword, setShowPassword] = useState(false);
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value
-        });
-
-        // Clear error when user starts typing
-        if (errors[name]) {
-            setErrors({
-                ...errors,
-                [name]: ''
-            });
-        }
-    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        // Get form data directly from the form
+        const formData = new FormData(e.target);
+        const email = formData.get('email');
+        const password = formData.get('password');
+
         // Validate form
         const newErrors = {};
 
-        if (!formData.email.trim()) newErrors.email = "Email is required";
-        if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = "Email is invalid";
-        if (!formData.password) newErrors.password = "Password is required";
+        if (!email.trim()) newErrors.email = "Email is required";
+        if (!/\S+@\S+\.\S+/.test(email)) newErrors.email = "Email is invalid";
+        if (!password) newErrors.password = "Password is required";
 
         if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors);
@@ -42,13 +26,13 @@ const Login = () => {
         }
 
         // Form is valid, proceed with login
-        // console.log("Form submitted:", formData);
+        // console.log("Form submitted:", { email, password });
         // Add your login logic here
     };
 
     const handleGoogleSignIn = () => {
         // Implement Google Sign-in logic here
-        // console.log("Google Sign-in clicked");
+        console.log("Google Sign-in clicked");
     };
 
     return (
@@ -57,7 +41,6 @@ const Login = () => {
             <div className="hidden md:flex md:w-1/2 bg-emerald-600 flex-col justify-center items-center text-white p-10">
                 <h1 className="text-4xl font-bold mb-6">Welcome Back!</h1>
                 <p className="text-xl mb-8">Sign in to your Plant Planet Account</p>
-
             </div>
 
             {/* Right side - Login form */}
@@ -76,10 +59,9 @@ const Login = () => {
                                 type="email"
                                 id="email"
                                 name="email"
-                                value={formData.email}
-                                onChange={handleChange}
                                 className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${errors.email ? 'border-red-500 focus:ring-red-200' : 'focus:ring-emerald-200 border-gray-300'}`}
                                 placeholder="Enter your email"
+                                onChange={(e) => errors.email && setErrors({ ...errors, email: '' })}
                             />
                             {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
                         </div>
@@ -92,10 +74,9 @@ const Login = () => {
                                     type={showPassword ? "text" : "password"}
                                     id="password"
                                     name="password"
-                                    value={formData.password}
-                                    onChange={handleChange}
                                     className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${errors.password ? 'border-red-500 focus:ring-red-200' : 'focus:ring-emerald-200 border-gray-300'}`}
                                     placeholder="Enter your password"
+                                    onChange={(e) => errors.password && setErrors({ ...errors, password: '' })}
                                 />
                                 <button
                                     type="button"
