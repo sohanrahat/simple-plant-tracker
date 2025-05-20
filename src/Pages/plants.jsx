@@ -1,6 +1,6 @@
 import React from 'react';
 
-const plants = () => {
+const Plants = () => {
     return (
         <div>
             plants
@@ -8,4 +8,4 @@ const plants = () => {
     );
 };
 
-export default plants;
+export default Plants;
