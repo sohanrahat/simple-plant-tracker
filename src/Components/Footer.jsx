@@ -6,7 +6,7 @@ const Footer = () => {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="bg-green-800 text-white py-8">
+        <footer className="bg-emerald-700 text-white py-8">
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {/* Brand and About */}
@@ -73,7 +73,7 @@ const Footer = () => {
                 </div>
 
                 {/* Copyright */}
-                <div className="border-t border-green-700 mt-6 pt-6 text-center">
+                <div className="border-t border-white mt-6 pt-6 text-center">
                     <p>&copy; {currentYear} PlantPlanet. All rights reserved.</p>
                 </div>
             </div>

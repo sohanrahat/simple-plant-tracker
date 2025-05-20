@@ -137,9 +137,9 @@ const Register = () => {
                         {/* Submit button */}
                         <Link to='/'
                             type="submit"
-                            className="w-full bg-emerald-600 text-white py-2 px-4 rounded-lg hover:bg-emerald-700 transition duration-300 font-medium"
+                            className="w-full bg-emerald-600 text-white py-2 px-4 rounded-md hover:bg-emerald-700 transition duration-300 font-medium border-b border-emerald-600"
                         >
-                            Create Account
+                            Register
                         </Link>
                     </form>
 
