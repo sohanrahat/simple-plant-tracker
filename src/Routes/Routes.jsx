@@ -1,5 +1,6 @@
-const { createBrowserRouter } = require("react-router");
+import { createBrowserRouter } from "react-router";
 import Root from "../Layout/Root";
+import Home from "../Pages/Home";
 
 const router = createBrowserRouter([
     {
@@ -9,10 +10,13 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <Home></Home>
+                element: <Home />,
+
             },
 
         ]
 
     }
 ])
+
+export default router; 
