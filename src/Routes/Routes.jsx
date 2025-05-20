@@ -4,7 +4,7 @@ import Home from "../Pages/Home";
 import Error from "../Pages/Error";
 import MyPlants from "../Pages/MyPlants";
 import AddPlant from "../Pages/AddPlant";
-import Plants from "../Pages/plants";
+import AllPlants from "../Pages/AllPlants";
 import PlantDetails from "../Pages/PlantDetails";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
@@ -21,8 +21,8 @@ const router = createBrowserRouter([
                 element: <Home />,
             },
             {
-                path: "/plants",
-                element: <Plants />,
+                path: "/all-plants",
+                element: <AllPlants />,
             },
             {
                 path: "/plant-details/:id",
