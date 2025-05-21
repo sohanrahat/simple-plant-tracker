@@ -1,12 +1,22 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router';
+import React, { useState, useContext } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router';
+import { AuthContext } from '../Context/AuthProvider';
+import Swal from 'sweetalert2';
 
 const Login = () => {
+    const { signIn, signInWithGoogle } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/';
+
     const [errors, setErrors] = useState({});
     const [showPassword, setShowPassword] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setLoading(true);
 
         // Get form data directly from the form
         const formData = new FormData(e.target);
@@ -22,17 +32,54 @@ const Login = () => {
 
         if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors);
+            setLoading(false);
             return;
         }
 
         // Form is valid, proceed with login
-        // console.log("Form submitted:", { email, password });
-        // Add your login logic here
+        signIn(email, password)
+            .then(result => {
+                // Login successful
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Login Successful!',
+                    text: 'Welcome back to Plant Planet!',
+                    confirmButtonColor: '#059669'
+                }).then(() => {
+                    navigate(from, { replace: true });
+                });
+            })
+            .catch(error => {
+                // Handle login errors
+                console.error("Login error:", error.message);
+                setErrors({ submit: "Invalid email or password. Please try again." });
+            })
+            .finally(() => {
+                setLoading(false);
+            });
     };
 
     const handleGoogleSignIn = () => {
-        // Implement Google Sign-in logic here
-        // console.log("Google Sign-in clicked");
+        setLoading(true);
+        signInWithGoogle()
+            .then(result => {
+                // Google login successful
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Login Successful!',
+                    text: 'Welcome to Plant Planet!',
+                    confirmButtonColor: '#059669'
+                }).then(() => {
+                    navigate(from, { replace: true });
+                });
+            })
+            .catch(error => {
+                console.error("Google login error:", error.message);
+                setErrors({ submit: "Google sign-in failed. Please try again." });
+            })
+            .finally(() => {
+                setLoading(false);
+            });
     };
 
     return (
@@ -97,9 +144,14 @@ const Login = () => {
                         <button
                             type="submit"
                             className="w-full bg-emerald-600 text-white py-2 px-4 rounded-lg hover:bg-emerald-700 transition duration-300 font-medium"
+                            disabled={loading}
                         >
-                            Sign In
+                            {loading ? "Signing In..." : "Sign In"}
                         </button>
+
+                        {errors.submit && (
+                            <p className="mt-2 text-center text-red-500">{errors.submit}</p>
+                        )}
                     </form>
 
                     {/* Divider */}
@@ -113,6 +165,7 @@ const Login = () => {
                     <button
                         onClick={handleGoogleSignIn}
                         className="w-full flex items-center justify-center gap-2 bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-50 transition duration-300 font-medium"
+                        disabled={loading}
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="24px" height="24px">
                             <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z" />
