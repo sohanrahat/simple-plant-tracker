@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router';
+import React, { useState, useContext } from 'react';
+import { Link, useNavigate } from 'react-router';
+import { AuthContext } from '../Context/AuthProvider';
 
 const Register = () => {
+    const { createUser } = useContext(AuthContext);
+    const navigate = useNavigate();
+
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -11,6 +15,7 @@ const Register = () => {
 
     const [errors, setErrors] = useState({});
     const [showPassword, setShowPassword] = useState(false);
+    const [loading, setLoading] = useState(false);
 
 
 
@@ -26,8 +31,17 @@ const Register = () => {
         return "";
     };
 
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+    };
+
     const handleRegister = (e) => {
         e.preventDefault();
+        setLoading(true);
 
         // Validate form
         const newErrors = {};
@@ -41,12 +55,25 @@ const Register = () => {
 
         if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors);
+            setLoading(false);
             return;
         }
 
         // Form is valid, proceed with registration
-        // console.log("Form submitted:", formData);
-        // Add your registration logic here
+        createUser(formData.email, formData.password)
+            .then(result => {
+                // Registration successful
+                console.log("User registered successfully:", result.user);
+                navigate('/');
+            })
+            .catch(error => {
+                // Handle registration errors
+                console.error("Registration error:", error.message);
+                setErrors({ submit: error.message });
+            })
+            .finally(() => {
+                setLoading(false);
+            });
     };
 
     return (
@@ -74,7 +101,8 @@ const Register = () => {
                                 type="text"
                                 id="name"
                                 name="name"
-
+                                value={formData.name}
+                                onChange={handleChange}
                                 className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${errors.name ? 'border-red-500 focus:ring-red-200' : 'focus:ring-emerald-200 border-gray-300'}`}
                                 placeholder="Enter your full name"
                             />
@@ -88,7 +116,8 @@ const Register = () => {
                                 type="email"
                                 id="email"
                                 name="email"
-
+                                value={formData.email}
+                                onChange={handleChange}
                                 className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${errors.email ? 'border-red-500 focus:ring-red-200' : 'focus:ring-emerald-200 border-gray-300'}`}
                                 placeholder="Enter your email"
                             />
@@ -102,7 +131,8 @@ const Register = () => {
                                 type="url"
                                 id="photoURL"
                                 name="photoURL"
-
+                                value={formData.photoURL}
+                                onChange={handleChange}
                                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-200"
                                 placeholder="Enter photo URL (optional)"
                             />
@@ -116,7 +146,8 @@ const Register = () => {
                                     type={showPassword ? "text" : "password"}
                                     id="password"
                                     name="password"
-
+                                    value={formData.password}
+                                    onChange={handleChange}
                                     className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${errors.password ? 'border-red-500 focus:ring-red-200' : 'focus:ring-emerald-200 border-gray-300'}`}
                                     placeholder="Create a password"
                                 />
@@ -135,12 +166,17 @@ const Register = () => {
                         </div>
 
                         {/* Submit button */}
-                        <Link to='/'
+                        <button
                             type="submit"
                             className="w-full bg-emerald-600 text-white py-2 px-4 rounded-md hover:bg-emerald-700 transition duration-300 font-medium border-b border-emerald-600"
+                            disabled={loading}
                         >
-                            Register
-                        </Link>
+                            {loading ? "Registering..." : "Register"}
+                        </button>
+
+                        {errors.submit && (
+                            <p className="mt-2 text-center text-red-500">{errors.submit}</p>
+                        )}
                     </form>
 
                     <div className="mt-6 text-center">
