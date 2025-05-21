@@ -30,23 +30,23 @@ const AddPlant = () => {
     };
 
     return (
-        <div className="max-w-4xl mx-auto p-6 bg-green-50">
+        <div className="max-w-4xl my-3 mx-auto p-6 bg-green-50">
             <h2 className="text-3xl font-bold text-center mb-8 text-green-800">Add a New Plant</h2>
-            
+
             <form onSubmit={handleSubmit} className="space-y-6 bg-white p-8 rounded-lg shadow-md border-2 border-green-200">
                 {/* Image URL Input */}
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text font-medium text-green-700">Plant Image URL</span>
                     </label>
-                    <input 
-                        type="text" 
-                        name="image" 
+                    <input
+                        type="text"
+                        name="image"
                         value={formData.image}
                         onChange={handleChange}
-                        placeholder="Enter image URL" 
-                        className="input input-bordered w-full focus:border-green-500 focus:ring-green-500" 
-                        required 
+                        placeholder="Enter image URL"
+                        className="input input-bordered w-full focus:border-green-500 focus:ring-green-500"
+                        required
                     />
                 </div>
 
@@ -55,14 +55,14 @@ const AddPlant = () => {
                     <label className="label">
                         <span className="label-text font-medium text-green-700">Plant Name</span>
                     </label>
-                    <input 
-                        type="text" 
-                        name="plantName" 
+                    <input
+                        type="text"
+                        name="plantName"
                         value={formData.plantName}
                         onChange={handleChange}
-                        placeholder="Enter plant name" 
-                        className="input input-bordered w-full focus:border-green-500" 
-                        required 
+                        placeholder="Enter plant name"
+                        className="input input-bordered w-full focus:border-green-500"
+                        required
                     />
                 </div>
 
@@ -71,11 +71,11 @@ const AddPlant = () => {
                     <label className="label">
                         <span className="label-text font-medium text-green-700">Category</span>
                     </label>
-                    <select 
-                        name="category" 
+                    <select
+                        name="category"
                         value={formData.category}
                         onChange={handleChange}
-                        className="select select-bordered w-full focus:border-green-500 bg-green-50" 
+                        className="select select-bordered w-full focus:border-green-500 bg-green-50"
                         required
                     >
                         <option value="" disabled>Select a category</option>
@@ -95,12 +95,12 @@ const AddPlant = () => {
                     <label className="label">
                         <span className="label-text font-medium text-green-700">Description</span>
                     </label>
-                    <textarea 
-                        name="description" 
+                    <textarea
+                        name="description"
                         value={formData.description}
                         onChange={handleChange}
-                        placeholder="Enter plant description" 
-                        className="textarea textarea-bordered w-full h-24 focus:border-green-500 bg-green-50" 
+                        placeholder="Enter plant description"
+                        className="textarea textarea-bordered w-full h-24 focus:border-green-500 bg-green-50"
                         required
                     ></textarea>
                 </div>
@@ -110,11 +110,11 @@ const AddPlant = () => {
                     <label className="label">
                         <span className="label-text font-medium text-green-700">Care Level</span>
                     </label>
-                    <select 
-                        name="careLevel" 
+                    <select
+                        name="careLevel"
                         value={formData.careLevel}
                         onChange={handleChange}
-                        className="select select-bordered w-full focus:border-green-500 bg-green-50" 
+                        className="select select-bordered w-full focus:border-green-500 bg-green-50"
                         required
                     >
                         <option value="" disabled>Select care level</option>
@@ -129,14 +129,14 @@ const AddPlant = () => {
                     <label className="label">
                         <span className="label-text font-medium text-green-700">Watering Frequency</span>
                     </label>
-                    <input 
-                        type="text" 
-                        name="wateringFrequency" 
+                    <input
+                        type="text"
+                        name="wateringFrequency"
                         value={formData.wateringFrequency}
                         onChange={handleChange}
-                        placeholder="e.g., every 3 days" 
-                        className="input input-bordered w-full focus:border-green-500 focus:ring-blue-500" 
-                        required 
+                        placeholder="e.g., every 3 days"
+                        className="input input-bordered w-full focus:border-green-500 focus:ring-blue-500"
+                        required
                     />
                 </div>
 
@@ -145,13 +145,13 @@ const AddPlant = () => {
                     <label className="label">
                         <span className="label-text font-medium text-green-700">Last Watered Date</span>
                     </label>
-                    <input 
-                        type="date" 
-                        name="lastWateredDate" 
+                    <input
+                        type="date"
+                        name="lastWateredDate"
                         value={formData.lastWateredDate}
                         onChange={handleChange}
-                        className="input input-bordered w-full focus:border-green-500 bg-blue-50" 
-                        required 
+                        className="input input-bordered w-full focus:border-green-500 bg-blue-50"
+                        required
                     />
                 </div>
 
@@ -160,13 +160,13 @@ const AddPlant = () => {
                     <label className="label">
                         <span className="label-text font-medium text-green-700">Next Watering Date</span>
                     </label>
-                    <input 
-                        type="date" 
-                        name="nextWateringDate" 
+                    <input
+                        type="date"
+                        name="nextWateringDate"
                         value={formData.nextWateringDate}
                         onChange={handleChange}
-                        className="input input-bordered w-full focus:border-green-500 bg-blue-50" 
-                        required 
+                        className="input input-bordered w-full focus:border-green-500 bg-blue-50"
+                        required
                     />
                 </div>
 
@@ -175,14 +175,14 @@ const AddPlant = () => {
                     <label className="label">
                         <span className="label-text font-medium text-green-700">Health Status</span>
                     </label>
-                    <input 
-                        type="text" 
-                        name="healthStatus" 
+                    <input
+                        type="text"
+                        name="healthStatus"
                         value={formData.healthStatus}
                         onChange={handleChange}
-                        placeholder="Enter plant health status" 
-                        className="input input-bordered w-full focus:border-green-500" 
-                        required 
+                        placeholder="Enter plant health status"
+                        className="input input-bordered w-full focus:border-green-500"
+                        required
                     />
                 </div>
 
@@ -191,14 +191,14 @@ const AddPlant = () => {
                     <label className="label">
                         <span className="label-text font-medium text-green-700">User Email</span>
                     </label>
-                    <input 
-                        type="email" 
-                        name="userEmail" 
+                    <input
+                        type="email"
+                        name="userEmail"
                         value={formData.userEmail}
                         onChange={handleChange}
-                        placeholder="Enter your email" 
-                        className="input input-bordered w-full focus:border-green-500" 
-                        required 
+                        placeholder="Enter your email"
+                        className="input input-bordered w-full focus:border-green-500"
+                        required
                     />
                 </div>
 
@@ -207,14 +207,14 @@ const AddPlant = () => {
                     <label className="label">
                         <span className="label-text font-medium text-green-700">User Name</span>
                     </label>
-                    <input 
-                        type="text" 
-                        name="userName" 
+                    <input
+                        type="text"
+                        name="userName"
                         value={formData.userName}
                         onChange={handleChange}
-                        placeholder="Enter your name" 
-                        className="input input-bordered w-full focus:border-green-500" 
-                        required 
+                        placeholder="Enter your name"
+                        className="input input-bordered w-full focus:border-green-500"
+                        required
                     />
                 </div>
 
