@@ -1,6 +1,9 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import indoorPlant from '../assets/indoorPlant.jpg';
+import personalized from '../assets/personalized.jpg';
+import plantCare from '../assets/plantCare.jpg';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -35,7 +38,7 @@ const Hero = () => {
                             </div>
                             <div className="md:w-1/2">
                                 <img
-                                    src="https://images.unsplash.com/photo-1545241047-6083a3684587?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                                    src={indoorPlant}
                                     alt="Indoor Plants Collection"
                                     className="rounded-lg shadow-xl max-h-[60vh] object-cover mx-auto"
                                 />
@@ -55,7 +58,7 @@ const Hero = () => {
                             </div>
                             <div className="md:w-1/2">
                                 <img
-                                    src="https://images.unsplash.com/photo-1673853233647-17ebc2d71b5f?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                    src={plantCare}
                                     alt="Plant Care Products"
                                     className="rounded-lg shadow-xl max-h-[60vh] object-cover mx-auto"
                                 />
@@ -75,7 +78,7 @@ const Hero = () => {
                             </div>
                             <div className="md:w-1/2">
                                 <img
-                                    src="https://images.unsplash.com/photo-1558693168-c370615b54e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                                    src={personalized}
                                     alt="Plant Expert Advice"
                                     className="rounded-lg shadow-xl max-h-[60vh] object-cover mx-auto"
                                 />
