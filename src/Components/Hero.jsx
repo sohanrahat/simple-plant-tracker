@@ -54,7 +54,7 @@ const Hero = () => {
                             <div className="md:w-1/2 text-white p-8">
                                 <h1 className="text-4xl md:text-5xl font-bold mb-4">Plant Care Essentials</h1>
                                 <p className="text-lg mb-6">Everything you need to keep your plants thriving - from premium soil to specialized tools and organic fertilizers.</p>
-                                <button className="bg-white text-amber-700 px-6 py-3 rounded-lg font-semibold hover:bg-amber-100 transition duration-300">Explore Care Products</button>
+                                <button className="bg-white text-green-800 px-6 py-3 rounded-lg font-semibold hover:bg-green-100 transition duration-300">Explore Care Products</button>
                             </div>
                             <div className="md:w-1/2">
                                 <img
@@ -74,7 +74,7 @@ const Hero = () => {
                             <div className="md:w-1/2 text-white p-8">
                                 <h1 className="text-4xl md:text-5xl font-bold mb-4">Expert Plant Care Advice</h1>
                                 <p className="text-lg mb-6">Get personalized guidance from our plant specialists and access our library of care guides for all plant types.</p>
-                                <button className="bg-white text-blue-800 px-6 py-3 rounded-lg font-semibold hover:bg-blue-100 transition duration-300">Get Plant Advice</button>
+                                <button className="bg-white text-green-800 px-6 py-3 rounded-lg font-semibold hover:bg-green-100 transition duration-300">Get Plant Advice</button>
                             </div>
                             <div className="md:w-1/2">
                                 <img
