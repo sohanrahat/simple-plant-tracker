@@ -32,7 +32,7 @@ const Login = () => {
 
     const handleGoogleSignIn = () => {
         // Implement Google Sign-in logic here
-        console.log("Google Sign-in clicked");
+        // console.log("Google Sign-in clicked");
     };
 
     return (
