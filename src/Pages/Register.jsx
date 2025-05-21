@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../Context/AuthProvider';
+import Swal from 'sweetalert2';
 
 const Register = () => {
     const { createUser } = useContext(AuthContext);
@@ -59,16 +60,22 @@ const Register = () => {
             return;
         }
 
-        // Form is valid, proceed with registration
         createUser(formData.email, formData.password)
             .then(result => {
-                // Registration successful
-                console.log("User registered successfully:", result.user);
-                navigate('/');
+                // console.log("User registered successfully:", result.user);
+
+                // SweetAlert
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Registration Successful!',
+                    text: 'Welcome to Plant Planet!',
+                    confirmButtonColor: '#059669'
+                }).then(() => {
+                    navigate('/');
+                });
             })
             .catch(error => {
-                // Handle registration errors
-                console.error("Registration error:", error.message);
+                // console.error("Registration error:", error.message);
                 setErrors({ submit: error.message });
             })
             .finally(() => {
