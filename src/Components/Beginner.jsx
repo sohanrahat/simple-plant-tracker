@@ -1,12 +1,18 @@
 import React from 'react';
 import { FaWater, FaSun, FaSeedling } from 'react-icons/fa';
+import snake from "../assets/snake.avif";
+import pothos from "../assets/pothos.avif";
+import zz from "../assets/zz.avif";
+import spider from "../assets/spider.avif";
+
+
 
 const Beginner = () => {
     const beginnerPlants = [
         {
             id: 1,
             name: "Snake Plant",
-            image: "https://images.unsplash.com/photo-1593482892290-f54c7f8b7f53?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+            image: snake,
             description: "Nearly indestructible, can survive with minimal water and low light.",
             waterNeeds: "Low",
             lightNeeds: "Low to Medium",
@@ -15,7 +21,7 @@ const Beginner = () => {
         {
             id: 2,
             name: "Pothos",
-            image: "https://images.unsplash.com/photo-1600411833196-7c1f6b1a8b90?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+            image: pothos,
             description: "Fast-growing vine that thrives in various conditions.",
             waterNeeds: "Medium",
             lightNeeds: "Low to Bright Indirect",
@@ -24,7 +30,7 @@ const Beginner = () => {
         {
             id: 3,
             name: "ZZ Plant",
-            image: "https://images.unsplash.com/photo-1614594975525-e45190c55d0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+            image: zz,
             description: "Drought-tolerant with glossy leaves, perfect for forgetful waterers.",
             waterNeeds: "Low",
             lightNeeds: "Low to Medium",
@@ -33,7 +39,7 @@ const Beginner = () => {
         {
             id: 4,
             name: "Spider Plant",
-            image: "https://images.unsplash.com/photo-1572688484438-313a6e50c333?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+            image: spider,
             description: "Produces baby plants on long stems, air-purifying and resilient.",
             waterNeeds: "Medium",
             lightNeeds: "Bright Indirect",
