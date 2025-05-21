@@ -4,10 +4,12 @@ import Home from "../Pages/Home";
 import Error from "../Pages/Error";
 import MyPlants from "../Pages/MyPlants";
 import AddPlant from "../Pages/AddPlant";
+import UpdatePlant from "../Pages/UpdatePlant";
 import AllPlants from "../Pages/AllPlants";
 import PlantDetails from "../Pages/PlantDetails";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
+import PrivateRoute from "../Context/PrivateRoute";
 
 
 const router = createBrowserRouter([
@@ -30,15 +32,15 @@ const router = createBrowserRouter([
             },
             {
                 path: "/my-plants",
-                element: <MyPlants />
+                element: <PrivateRoute><MyPlants /></PrivateRoute>
             },
             {
                 path: "/add-plant",
-                element: <AddPlant />
+                element: <PrivateRoute><AddPlant /></PrivateRoute>
             },
             {
                 path: "/update-plant/:id",
-                element: <AddPlant />
+                element: <PrivateRoute><UpdatePlant /></PrivateRoute>
             },
             {
                 path: "/login",
