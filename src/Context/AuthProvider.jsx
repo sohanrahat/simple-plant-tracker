@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import app from "../firebase/firebase.config";
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup, updateProfile } from "firebase/auth";
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
@@ -9,10 +9,31 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const googleProvider = new GoogleAuthProvider();
+    
+    // Check for user in localStorage to prevent flash of logged out state
+    useEffect(() => {
+        const storedUser = localStorage.getItem('plantPlanetUser');
+        if (storedUser) {
+            try {
+                setUser(JSON.parse(storedUser));
+            } catch (error) {
+                console.error('Error parsing stored user:', error);
+            }
+        }
+    }, []);
 
-    const createUser = (email, password) => {
+    const createUser = (email, password, name, photoURL) => {
         setLoading(true);
-        return createUserWithEmailAndPassword(auth, email, password);
+        return createUserWithEmailAndPassword(auth, email, password)
+            .then(result => {
+                // Update profile after creating user
+                return updateProfile(result.user, {
+                    displayName: name,
+                    photoURL: photoURL || "https://i.ibb.co/MBtjqXQ/no-avatar.gif"
+                }).then(() => {
+                    return result;
+                });
+            });
     };
 
     const signIn = (email, password) => {
@@ -22,7 +43,16 @@ const AuthProvider = ({ children }) => {
 
     const signInWithGoogle = () => {
         setLoading(true);
-        return signInWithPopup(auth, googleProvider);
+        return signInWithPopup(auth, googleProvider)
+            .then(result => {
+                // Ensure the photoURL is available
+                if (!result.user.photoURL) {
+                    return updateProfile(result.user, {
+                        photoURL: "https://i.ibb.co/MBtjqXQ/no-avatar.gif"
+                    }).then(() => result);
+                }
+                return result;
+            });
     };
 
     const logOut = () => {
@@ -32,7 +62,24 @@ const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser);
+            if (currentUser) {
+                console.log("Auth state changed, current user:", currentUser);
+                
+                // Create a simplified user object with just the properties we need
+                const userObj = {
+                    uid: currentUser.uid,
+                    email: currentUser.email,
+                    displayName: currentUser.displayName || '',
+                    photoURL: currentUser.photoURL || 'https://i.ibb.co/MBtjqXQ/no-avatar.gif'
+                };
+                
+                console.log("Setting user state with:", userObj);
+                localStorage.setItem('plantPlanetUser', JSON.stringify(userObj));
+                setUser(userObj); // Use simplified object instead of Firebase user object
+            } else {
+                localStorage.removeItem('plantPlanetUser');
+                setUser(null);
+            }
             setLoading(false);
         });
 

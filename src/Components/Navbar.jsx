@@ -1,7 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router';
+import { AuthContext } from '../Context/AuthProvider';
 
 const Navbar = () => {
+    const { user, loading, logOut } = useContext(AuthContext);
+
+    const handleLogout = () => {
+        logOut()
+            .then(() => {
+                console.log('User logged out successfully');
+                localStorage.removeItem('plantPlanetUser');
+                window.location.reload(); // Force reload to clear any cached state
+            })
+            .catch(error => {
+                console.error('Logout error:', error);
+            });
+    };
+
+    // Default avatar URL
+    const defaultAvatar = "https://i.ibb.co/MBtjqXQ/no-avatar.gif";
     return (
         <div>
             <div className="navbar bg-base-100 shadow-sm">
@@ -29,9 +46,30 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end gap-2">
-                    <Link to='/login' className="btn">Login</Link>
-                    <Link to='/Register' className="btn">Register</Link>
-
+                    {loading ? (
+                        <span className="loading loading-spinner loading-md text-emerald-500"></span>
+                    ) : user ? (
+                        <div className="flex items-center gap-3">
+                            <div className="tooltip tooltip-left z-10" data-tip={user?.displayName || user?.email || 'User'}>
+                                <div className="avatar">
+                                    <div className="w-10 rounded-full ring ring-emerald-500 ring-offset-base-100 ring-offset-2">
+                                        <img
+                                            src={user?.photoURL || defaultAvatar}
+                                            alt="User"
+                                            className="w-full h-full object-cover"
+                                            onError={(e) => { e.target.src = defaultAvatar }}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <button onClick={handleLogout} className="btn">Logout</button>
+                        </div>
+                    ) : (
+                        <>
+                            <Link to='/login' className="btn">Login</Link>
+                            <Link to='/Register' className="btn">Register</Link>
+                        </>
+                    )}
                 </div>
             </div>
         </div>

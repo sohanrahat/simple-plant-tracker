@@ -40,6 +40,15 @@ const Login = () => {
         signIn(email, password)
             .then(result => {
                 // Login successful
+                // Ensure user data is properly stored in localStorage
+                const userToStore = {
+                    uid: result.user.uid,
+                    email: result.user.email,
+                    displayName: result.user.displayName,
+                    photoURL: result.user.photoURL
+                };
+                localStorage.setItem('plantPlanetUser', JSON.stringify(userToStore));
+
                 Swal.fire({
                     icon: 'success',
                     title: 'Login Successful!',
@@ -64,6 +73,16 @@ const Login = () => {
         signInWithGoogle()
             .then(result => {
                 // Google login successful
+                // Ensure user data is properly stored in localStorage with default avatar if needed
+                const userToStore = {
+                    uid: result.user.uid,
+                    email: result.user.email,
+                    displayName: result.user.displayName,
+                    photoURL: result.user.photoURL || "https://i.ibb.co/MBtjqXQ/no-avatar.gif"
+                };
+                console.log("Google sign-in user data:", userToStore);
+                localStorage.setItem('plantPlanetUser', JSON.stringify(userToStore));
+
                 Swal.fire({
                     icon: 'success',
                     title: 'Login Successful!',

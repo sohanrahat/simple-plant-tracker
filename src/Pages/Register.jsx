@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../Context/AuthProvider';
+import { getAuth, signOut } from 'firebase/auth';
 import Swal from 'sweetalert2';
 
 const Register = () => {
@@ -60,18 +61,24 @@ const Register = () => {
             return;
         }
 
-        createUser(formData.email, formData.password)
+        createUser(formData.email, formData.password, formData.name, formData.photoURL)
             .then(result => {
-                // console.log("User registered successfully:", result.user);
+                // Sign out immediately after registration
+                const auth = getAuth();
+                signOut(auth).then(() => {
+                    // Clear any stored user data
+                    localStorage.removeItem('plantPlanetUser');
 
-                // SweetAlert
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Registration Successful!',
-                    text: 'Welcome to Plant Planet!',
-                    confirmButtonColor: '#059669'
-                }).then(() => {
-                    navigate('/');
+                    // Show success message
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Registration Successful!',
+                        text: 'Please login to access your account',
+                        confirmButtonColor: '#059669'
+                    }).then(() => {
+                        // Redirect to login page instead of home
+                        navigate('/');
+                    });
                 });
             })
             .catch(error => {
