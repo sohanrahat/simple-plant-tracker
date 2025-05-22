@@ -1,14 +1,51 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useLoaderData, Link } from 'react-router';
 import { AuthContext } from '../Context/AuthProvider';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
+import Swal from 'sweetalert2';
+
 
 const MyPlants = () => {
     const allPlants = useLoaderData();
     const { user } = useContext(AuthContext);
 
     // Filter plants to show only those added by the current user
-    const myPlants = allPlants.filter(plant => plant.userEmail === user.email);
+    const filteredPlants = allPlants.filter(plant => plant.userEmail === user.email);
+    const [myPlants, setMyPlants] = useState(filteredPlants);
+
+    const handleDelete = (_id) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:3000/plants/${_id}`, {
+                    method: 'DELETE'
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.deletedCount > 0) {
+                            // Update the state to reflect the deletion
+                            const updatedPlants = myPlants.filter(plant => plant._id !== _id);
+                            setMyPlants(updatedPlants);
+                            
+                            // Show success message
+                            Swal.fire(
+                                'Deleted!',
+                                'Your plant has been deleted.',
+                                'success'
+                            );
+                        }
+                    });
+            }
+        });
+    };
+
 
     return (
         <div className="container mx-auto p-4">
@@ -28,8 +65,8 @@ const MyPlants = () => {
                                 <p className="flex items-center gap-2">
                                     <span className="font-semibold">Care Level:</span>
                                     <span className={`px-2 py-1 rounded-full text-xs ${plant.careLevel === 'easy' ? 'bg-green-100 text-green-800' :
-                                            plant.careLevel === 'moderate' ? 'bg-yellow-100 text-yellow-800' :
-                                                'bg-red-100 text-red-800'
+                                        plant.careLevel === 'moderate' ? 'bg-yellow-100 text-yellow-800' :
+                                            'bg-red-100 text-red-800'
                                         }`}>
                                         {plant.careLevel}
                                     </span>
@@ -42,7 +79,7 @@ const MyPlants = () => {
                                         <FaEdit className="mr-1" /> Update
                                     </Link>
                                     <button
-                                        onClick={() => console.log('Delete plant:', plant._id)}
+                                        onClick={() => handleDelete(plant._id)}
                                         className="btn btn-sm bg-red-600 hover:bg-red-700 text-white"
                                     >
                                         <FaTrashAlt className="mr-1" /> Delete
