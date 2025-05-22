@@ -31,7 +31,7 @@ const UpdatePlant = () => {
             })
             .then(data => {
                 console.log('Server response:', data);
-                
+
                 // Check for various success indicators
                 if (data.modifiedCount > 0 || data.acknowledged === true || data.success === true || data._id) {
                     Swal.fire({
@@ -43,7 +43,6 @@ const UpdatePlant = () => {
                         navigate('/my-plants');
                     });
                 } else {
-                    // No explicit success indicator, but no error either
                     console.log('Update may have succeeded, but no confirmation from server');
                     Swal.fire({
                         icon: 'success',
