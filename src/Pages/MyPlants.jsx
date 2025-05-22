@@ -9,7 +9,7 @@ const MyPlants = () => {
     const allPlants = useLoaderData();
     const { user } = useContext(AuthContext);
 
-    // Filter plants to show only those added by the current user
+    // Filter plants to show only those added by ME
     const filteredPlants = allPlants.filter(plant => plant.userEmail === user.email);
     const [myPlants, setMyPlants] = useState(filteredPlants);
 
@@ -30,11 +30,8 @@ const MyPlants = () => {
                     .then(res => res.json())
                     .then(data => {
                         if (data.deletedCount > 0) {
-                            // Update the state to reflect the deletion
                             const updatedPlants = myPlants.filter(plant => plant._id !== _id);
                             setMyPlants(updatedPlants);
-                            
-                            // Show success message
                             Swal.fire(
                                 'Deleted!',
                                 'Your plant has been deleted.',

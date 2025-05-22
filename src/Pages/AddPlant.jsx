@@ -13,7 +13,7 @@ const AddPlant = () => {
 
 
         // sending newPlant to the server db
-        console.log('Sending data to server:', newPlant);
+
         fetch('http://localhost:3000/plants', {
             method: 'POST',
             headers: {
@@ -23,7 +23,7 @@ const AddPlant = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log('Server response:', data);
+
                 if (data.insertedId) {
                     Swal.fire({
                         icon: 'success',
@@ -32,11 +32,11 @@ const AddPlant = () => {
                     })
                     form.reset();
                 } else {
-                    console.warn('No insertedId in response:', data);
+                    // console.warn('No insertedId in response:', data);
                 }
             })
             .catch(error => {
-                console.error("Error adding plant:", error);
+                // console.error("Error adding plant:", error);
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',

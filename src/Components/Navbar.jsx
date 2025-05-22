@@ -8,16 +8,16 @@ const Navbar = () => {
     const handleLogout = () => {
         logOut()
             .then(() => {
-                console.log('User logged out successfully');
+                // console.log('User logged out successfully');
                 localStorage.removeItem('plantPlanetUser');
                 window.location.reload(); // Force reload to clear any cached state
             })
             .catch(error => {
-                console.error('Logout error:', error);
+                // console.error('Logout error:', error);
             });
     };
 
-    // Default avatar URL
+    // Profile Pic 
     const defaultAvatar = "https://i.ibb.co/MBtjqXQ/no-avatar.gif";
     return (
         <div>

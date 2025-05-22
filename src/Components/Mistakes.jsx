@@ -50,7 +50,7 @@ const Mistakes = () => {
     return (
         <div className="py-12 px-4 md:px-8 bg-gradient-to-b from-green-50 to-white">
             <div className="max-w-6xl mx-auto">
-                {/* Header Section */}
+                {/* Header*/}
                 <div className="text-center mb-12">
                     <h1 className="text-3xl md:text-4xl font-bold text-green-800 mb-4">Top Plant Care Mistakes</h1>
                     <p className="text-lg text-gray-600 max-w-3xl mx-auto">
@@ -58,7 +58,7 @@ const Mistakes = () => {
                     </p>
                 </div>
 
-                {/* Mistakes Grid */}
+                {/* Mistakes*/}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {commonMistakes.map((mistake) => (
                         <div key={mistake.id} className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-300 border-l-4 border-green-500">
@@ -76,7 +76,7 @@ const Mistakes = () => {
                     ))}
                 </div>
 
-                {/* Tips Section */}
+                {/* Tips*/}
                 <div className="mt-16 bg-green-100 rounded-lg p-8">
                     <h2 className="text-2xl font-semibold text-green-800 mb-6 text-center">Pro Tips for Plant Success</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

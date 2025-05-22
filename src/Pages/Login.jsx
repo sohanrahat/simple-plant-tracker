@@ -36,11 +36,9 @@ const Login = () => {
             return;
         }
 
-        // Form is valid, proceed with login
         signIn(email, password)
             .then(result => {
-                // Login successful
-                // Ensure user data is properly stored in localStorage
+
                 const userToStore = {
                     uid: result.user.uid,
                     email: result.user.email,
@@ -59,8 +57,7 @@ const Login = () => {
                 });
             })
             .catch(error => {
-                // Handle login errors
-                console.error("Login error:", error.message);
+                // console.error("Login error:", error.message);
                 setErrors({ submit: "Invalid email or password. Please try again." });
             })
             .finally(() => {
@@ -72,15 +69,14 @@ const Login = () => {
         setLoading(true);
         signInWithGoogle()
             .then(result => {
-                // Google login successful
-                // Ensure user data is properly stored in localStorage with default avatar if needed
+
                 const userToStore = {
                     uid: result.user.uid,
                     email: result.user.email,
                     displayName: result.user.displayName,
                     photoURL: result.user.photoURL || "https://i.ibb.co/MBtjqXQ/no-avatar.gif"
                 };
-                console.log("Google sign-in user data:", userToStore);
+
                 localStorage.setItem('plantPlanetUser', JSON.stringify(userToStore));
 
                 Swal.fire({
@@ -93,7 +89,7 @@ const Login = () => {
                 });
             })
             .catch(error => {
-                console.error("Google login error:", error.message);
+                // console.error("Google login error:", error.message);
                 setErrors({ submit: "Google sign-in failed. Please try again." });
             })
             .finally(() => {

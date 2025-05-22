@@ -9,13 +9,13 @@ const Footer = () => {
         <footer className="bg-emerald-700 text-white py-8">
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {/* Brand and About */}
+                    {/* About */}
                     <div>
                         <h2 className="text-2xl font-bold mb-4">PlantPlanet</h2>
                         <p className="mb-4">Your one-stop destination for all plant care guidelines. Bringing nature into your home since 2020.</p>
                     </div>
 
-                    {/* Contact Information */}
+                    {/* Contact*/}
                     <div>
                         <h3 className="text-xl font-semibold mb-4">Contact Us</h3>
                         <div className="flex items-center mb-2">
@@ -29,7 +29,7 @@ const Footer = () => {
                         <p>123 Green Street, Plant City, PC 12345</p>
                     </div>
 
-                    {/* Social Media Links */}
+                    {/* Social */}
                     <div>
                         <h3 className="text-xl font-semibold mb-4">Connect With Us</h3>
                         <div className="flex space-x-4 mb-4">
@@ -47,7 +47,7 @@ const Footer = () => {
                             </a>
                         </div>
 
-                        {/* Quick Contact Form */}
+                        {/* small Contact Form */}
                         <form className="mt-4">
                             <h4 className="text-lg font-medium mb-2">Send us a message</h4>
                             <input

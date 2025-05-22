@@ -1,45 +1,22 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { useParams, useNavigate } from 'react-router';
-import { AuthContext } from '../Context/AuthProvider';
+import React from 'react';
+import { useLoaderData, useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 
 const UpdatePlant = () => {
-    const { id } = useParams();
     const navigate = useNavigate();
-    const { user } = useContext(AuthContext);
-    const [plant, setPlant] = useState(null);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        // Fetch plant data by ID
-        fetch(`http://localhost:3000/plants/${id}`)
-            .then(res => res.json())
-            .then(data => {
-                setPlant(data);
-                setLoading(false);
-            })
-            .catch(error => {
-                console.error("Error fetching plant data:", error);
-                setLoading(false);
-            });
-    }, [id]);
+    const plant = useLoaderData();
 
     const handleUpdatePlant = (e) => {
         e.preventDefault();
-
         const form = e.target;
         const formData = new FormData(form);
         const updatedPlant = Object.fromEntries(formData.entries());
 
-        // Add user email and name from context
-        updatedPlant.userEmail = user.email;
-        updatedPlant.userName = user.displayName;
-
-        // Update plant in the database
-        fetch(`http://localhost:3000/plants/${id}`, {
+        // send updatedPlant to the db 
+        fetch(`http://localhost:3000/plants/${plant._id}`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'content-type': 'application/json'
             },
             body: JSON.stringify(updatedPlant)
         })
@@ -49,35 +26,33 @@ const UpdatePlant = () => {
                     Swal.fire({
                         icon: 'success',
                         title: 'Plant Updated Successfully!',
+                        text: 'Your plant information has been updated.',
                         confirmButtonColor: '#059669'
+                    }).then(() => {
+                        navigate('/my-plants');
                     });
-                    navigate('/my-plants');
                 }
+
             })
             .catch(error => {
-                console.error("Error updating plant:", error);
+                // console.error('Error updating plant:', error);
                 Swal.fire({
                     icon: 'error',
-                    title: 'Oops...',
-                    text: 'Something went wrong! Check console for details.',
+                    title: 'Update Failed',
+                    text: 'Something went wrong! Please try again.',
                     confirmButtonColor: '#059669'
                 });
             });
+
+
     };
-
-    if (loading) {
-        return <div className="flex justify-center items-center h-screen">Loading...</div>;
-    }
-
-    if (!plant) {
-        return <div className="text-center py-10">Plant not found</div>;
-    }
 
     return (
         <div className="max-w-4xl my-3 mx-auto p-6 bg-green-50">
             <h2 className="text-3xl font-bold text-center mb-8 text-green-800">Update Plant</h2>
 
             <form onSubmit={handleUpdatePlant} className="space-y-6 bg-white p-8 rounded-lg shadow-md border-2 border-green-200">
+
                 {/* Plant Name */}
                 <div className="form-control">
                     <label className="label">
@@ -86,7 +61,7 @@ const UpdatePlant = () => {
                     <input
                         type="text"
                         name="plantName"
-                        defaultValue={plant.plantName}
+                        defaultValue={plant?.plantName}
                         placeholder="Enter plant name"
                         className="input input-bordered w-full focus:border-green-500"
                         required
@@ -101,9 +76,9 @@ const UpdatePlant = () => {
                     <input
                         type="text"
                         name="image"
-                        defaultValue={plant.image}
+                        defaultValue={plant?.image}
                         placeholder="Enter image URL"
-                        className="input input-bordered w-full focus:border-green-500"
+                        className="input input-bordered w-full focus:border-green-500 focus:ring-green-500"
                         required
                     />
                 </div>
@@ -115,7 +90,7 @@ const UpdatePlant = () => {
                     </label>
                     <select
                         name="category"
-                        defaultValue={plant.category}
+                        defaultValue={plant?.category}
                         className="select select-bordered w-full focus:border-green-500 bg-green-50"
                         required
                     >
@@ -138,7 +113,7 @@ const UpdatePlant = () => {
                     </label>
                     <textarea
                         name="description"
-                        defaultValue={plant.description}
+                        defaultValue={plant?.description}
                         placeholder="Enter plant description"
                         className="textarea textarea-bordered w-full h-24 focus:border-green-500 bg-green-50"
                         required
@@ -152,7 +127,7 @@ const UpdatePlant = () => {
                     </label>
                     <select
                         name="careLevel"
-                        defaultValue={plant.careLevel}
+                        defaultValue={plant?.careLevel}
                         className="select select-bordered w-full focus:border-green-500 bg-green-50"
                         required
                     >
@@ -171,9 +146,9 @@ const UpdatePlant = () => {
                     <input
                         type="text"
                         name="wateringFrequency"
-                        defaultValue={plant.wateringFrequency}
+                        defaultValue={plant?.wateringFrequency}
                         placeholder="e.g., every 3 days"
-                        className="input input-bordered w-full focus:border-green-500"
+                        className="input input-bordered w-full focus:border-green-500 focus:ring-blue-500"
                         required
                     />
                 </div>
@@ -186,7 +161,7 @@ const UpdatePlant = () => {
                     <input
                         type="date"
                         name="lastWateredDate"
-                        defaultValue={plant.lastWateredDate}
+                        defaultValue={plant?.lastWateredDate}
                         className="input input-bordered w-full focus:border-green-500 bg-blue-50"
                         required
                     />
@@ -200,7 +175,7 @@ const UpdatePlant = () => {
                     <input
                         type="date"
                         name="nextWateringDate"
-                        defaultValue={plant.nextWateringDate}
+                        defaultValue={plant?.nextWateringDate}
                         className="input input-bordered w-full focus:border-green-500 bg-blue-50"
                         required
                     />
@@ -214,16 +189,40 @@ const UpdatePlant = () => {
                     <input
                         type="text"
                         name="healthStatus"
-                        defaultValue={plant.healthStatus}
+                        defaultValue={plant?.healthStatus}
                         placeholder="Enter plant health status"
                         className="input input-bordered w-full focus:border-green-500"
                         required
                     />
                 </div>
 
-                {/* Hidden fields for user email and name */}
-                <input type="hidden" name="userEmail" value={user?.email} />
-                <input type="hidden" name="userName" value={user?.displayName} />
+                {/* User Email - Read Only */}
+                <div className="form-control">
+                    <label className="label">
+                        <span className="label-text font-medium text-green-700">User Email</span>
+                    </label>
+                    <input
+                        type="email"
+                        name="userEmail"
+                        defaultValue={plant?.userEmail}
+                        className="input input-bordered w-full bg-gray-100"
+                        readOnly
+                    />
+                </div>
+
+                {/* User Name - Read Only */}
+                <div className="form-control">
+                    <label className="label">
+                        <span className="label-text font-medium text-green-700">User Name</span>
+                    </label>
+                    <input
+                        type="text"
+                        name="userName"
+                        defaultValue={plant?.userName}
+                        className="input input-bordered w-full bg-gray-100"
+                        readOnly
+                    />
+                </div>
 
                 {/* Submit Button */}
                 <div className="form-control mt-8">

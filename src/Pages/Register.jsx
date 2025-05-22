@@ -63,20 +63,15 @@ const Register = () => {
 
         createUser(formData.email, formData.password, formData.name, formData.photoURL)
             .then(result => {
-                // Sign out immediately after registration
                 const auth = getAuth();
                 signOut(auth).then(() => {
-                    // Clear any stored user data
                     localStorage.removeItem('plantPlanetUser');
-
-                    // Show success message
                     Swal.fire({
                         icon: 'success',
                         title: 'Registration Successful!',
                         text: 'Please login to access your account',
                         confirmButtonColor: '#059669'
                     }).then(() => {
-                        // Redirect to login page instead of home
                         navigate('/');
                     });
                 });

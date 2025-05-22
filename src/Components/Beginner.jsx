@@ -50,7 +50,7 @@ const Beginner = () => {
     return (
         <div className="py-10 px-4 md:px-8 bg-gradient-to-b from-green-50 to-white">
             <div className="max-w-6xl mx-auto">
-                {/* Header Section */}
+                {/* Header*/}
                 <div className="text-center mb-12">
                     <h1 className="text-3xl md:text-4xl font-bold text-green-800 mb-4">Beginner-Friendly Plants</h1>
                     <p className="text-lg text-gray-600 max-w-3xl mx-auto">
@@ -58,7 +58,7 @@ const Beginner = () => {
                     </p>
                 </div>
 
-                {/* Quick Tips Section */}
+                {/* Quick Tips */}
                 <div className="bg-green-100 rounded-lg p-6 mb-12">
                     <h2 className="text-2xl font-semibold text-green-800 mb-4">New to Plant Care? Start Here!</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -125,7 +125,7 @@ const Beginner = () => {
                     ))}
                 </div>
 
-                {/* Call to Action */}
+                {/* button */}
                 <div className="mt-12 text-center">
                     <p className="text-lg text-gray-600 mb-4">Ready to start your plant journey?</p>
                     <button className="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-6 rounded-full transition-colors duration-300">

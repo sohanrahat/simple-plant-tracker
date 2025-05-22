@@ -5,7 +5,6 @@ import indoorPlant from '../assets/indoorPlant.jpg';
 import personalized from '../assets/personalized.jpg';
 import plantCare from '../assets/plantCare.jpg';
 
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
@@ -27,7 +26,7 @@ const Hero = () => {
                 modules={[Autoplay, Pagination, Navigation]}
                 className="mySwiper h-[80vh]"
             >
-                {/* Slide 1: Indoor Plants */}
+                {/* Slide 1*/}
                 <SwiperSlide>
                     <div className="hero-slide bg-gradient-to-r from-green-800 to-green-600 h-full flex items-center">
                         <div className="container mx-auto px-4 flex flex-col md:flex-row items-center">
@@ -47,7 +46,7 @@ const Hero = () => {
                     </div>
                 </SwiperSlide>
 
-                {/* Slide 2: Plant Care Essentials */}
+                {/* Slide 2*/}
                 <SwiperSlide>
                     <div className="hero-slide bg-gradient-to-r from-green-800 to-green-600 h-full flex items-center">
                         <div className="container mx-auto px-4 flex flex-col md:flex-row-reverse items-center">
@@ -67,7 +66,7 @@ const Hero = () => {
                     </div>
                 </SwiperSlide>
 
-                {/* Slide 3: Expert Advice */}
+                {/* Slide 3*/}
                 <SwiperSlide>
                     <div className="hero-slide bg-gradient-to-r from-green-800 to-green-600 h-full flex items-center">
                         <div className="container mx-auto px-4 flex flex-col md:flex-row items-center">
