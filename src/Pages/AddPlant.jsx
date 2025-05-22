@@ -1,54 +1,57 @@
+import Swal from 'sweetalert2';
 import React, { useState } from 'react';
 
 const AddPlant = () => {
-    const [formData, setFormData] = useState({
-        image: '',
-        plantName: '',
-        category: '',
-        description: '',
-        careLevel: '',
-        wateringFrequency: '',
-        lastWateredDate: '',
-        nextWateringDate: '',
-        healthStatus: '',
-        userEmail: '',
-        userName: ''
-    });
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value
-        });
-    };
-
-    const handleSubmit = (e) => {
+    const handleAddPlant = (e) => {
         e.preventDefault();
-        // Form submission logic will be handled later
-        console.log(formData);
+
+        const form = e.target;
+        const formData = new FormData(form);
+        const newPlant = Object.fromEntries(formData.entries());
+        // console.log(newPlant);
+
+
+        // sending newPlant to the server db
+        console.log('Sending data to server:', newPlant);
+        fetch('http://localhost:3000/plants', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newPlant)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log('Server response:', data);
+                if (data.insertedId) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Plant Added Successfully!',
+                        confirmButtonColor: '#059669'
+                    })
+                    form.reset();
+                } else {
+                    console.warn('No insertedId in response:', data);
+                }
+            })
+            .catch(error => {
+                console.error("Error adding plant:", error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong! Check console for details.',
+                    confirmButtonColor: '#059669'
+                });
+            });
+
     };
 
     return (
         <div className="max-w-4xl my-3 mx-auto p-6 bg-green-50">
             <h2 className="text-3xl font-bold text-center mb-8 text-green-800">Add a New Plant</h2>
 
-            <form onSubmit={handleSubmit} className="space-y-6 bg-white p-8 rounded-lg shadow-md border-2 border-green-200">
-                {/* Image URL Input */}
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text font-medium text-green-700">Plant Image URL</span>
-                    </label>
-                    <input
-                        type="text"
-                        name="image"
-                        value={formData.image}
-                        onChange={handleChange}
-                        placeholder="Enter image URL"
-                        className="input input-bordered w-full focus:border-green-500 focus:ring-green-500"
-                        required
-                    />
-                </div>
+            <form onSubmit={handleAddPlant} className="space-y-6 bg-white p-8 rounded-lg shadow-md border-2 border-green-200">
 
                 {/* Plant Name */}
                 <div className="form-control">
@@ -58,10 +61,23 @@ const AddPlant = () => {
                     <input
                         type="text"
                         name="plantName"
-                        value={formData.plantName}
-                        onChange={handleChange}
+
                         placeholder="Enter plant name"
                         className="input input-bordered w-full focus:border-green-500"
+                        required
+                    />
+                </div>
+                {/* Image URL Input */}
+                <div className="form-control">
+                    <label className="label">
+                        <span className="label-text font-medium text-green-700">Plant Image URL</span>
+                    </label>
+                    <input
+                        type="text"
+                        name="image"
+
+                        placeholder="Enter image URL"
+                        className="input input-bordered w-full focus:border-green-500 focus:ring-green-500"
                         required
                     />
                 </div>
@@ -73,8 +89,7 @@ const AddPlant = () => {
                     </label>
                     <select
                         name="category"
-                        value={formData.category}
-                        onChange={handleChange}
+
                         className="select select-bordered w-full focus:border-green-500 bg-green-50"
                         required
                     >
@@ -97,8 +112,7 @@ const AddPlant = () => {
                     </label>
                     <textarea
                         name="description"
-                        value={formData.description}
-                        onChange={handleChange}
+
                         placeholder="Enter plant description"
                         className="textarea textarea-bordered w-full h-24 focus:border-green-500 bg-green-50"
                         required
@@ -112,8 +126,7 @@ const AddPlant = () => {
                     </label>
                     <select
                         name="careLevel"
-                        value={formData.careLevel}
-                        onChange={handleChange}
+
                         className="select select-bordered w-full focus:border-green-500 bg-green-50"
                         required
                     >
@@ -132,8 +145,7 @@ const AddPlant = () => {
                     <input
                         type="text"
                         name="wateringFrequency"
-                        value={formData.wateringFrequency}
-                        onChange={handleChange}
+
                         placeholder="e.g., every 3 days"
                         className="input input-bordered w-full focus:border-green-500 focus:ring-blue-500"
                         required
@@ -148,8 +160,7 @@ const AddPlant = () => {
                     <input
                         type="date"
                         name="lastWateredDate"
-                        value={formData.lastWateredDate}
-                        onChange={handleChange}
+
                         className="input input-bordered w-full focus:border-green-500 bg-blue-50"
                         required
                     />
@@ -163,8 +174,7 @@ const AddPlant = () => {
                     <input
                         type="date"
                         name="nextWateringDate"
-                        value={formData.nextWateringDate}
-                        onChange={handleChange}
+
                         className="input input-bordered w-full focus:border-green-500 bg-blue-50"
                         required
                     />
@@ -178,8 +188,7 @@ const AddPlant = () => {
                     <input
                         type="text"
                         name="healthStatus"
-                        value={formData.healthStatus}
-                        onChange={handleChange}
+
                         placeholder="Enter plant health status"
                         className="input input-bordered w-full focus:border-green-500"
                         required
@@ -194,8 +203,7 @@ const AddPlant = () => {
                     <input
                         type="email"
                         name="userEmail"
-                        value={formData.userEmail}
-                        onChange={handleChange}
+
                         placeholder="Enter your email"
                         className="input input-bordered w-full focus:border-green-500"
                         required
@@ -210,8 +218,7 @@ const AddPlant = () => {
                     <input
                         type="text"
                         name="userName"
-                        value={formData.userName}
-                        onChange={handleChange}
+
                         placeholder="Enter your name"
                         className="input input-bordered w-full focus:border-green-500"
                         required
