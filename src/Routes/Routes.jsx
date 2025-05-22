@@ -19,11 +19,12 @@ const router = createBrowserRouter([
         errorElement: <Error />,
         children: [
             {
-                path: "/",
-                element: <Home />,
+                index: true,
+                element: <Home />
             },
             {
                 path: "/all-plants",
+                loader: () => fetch('http://localhost:3000/plants'),
                 element: <AllPlants />,
             },
             {
