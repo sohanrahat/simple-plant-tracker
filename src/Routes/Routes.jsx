@@ -20,6 +20,7 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
+                loader: () => fetch('http://localhost:3000/plants'),
                 element: <Home />
             },
             {
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/plant-details/:id",
-                loader: ({params}) => fetch(`http://localhost:3000/plants/${params.id}`),
+                loader: ({ params }) => fetch(`http://localhost:3000/plants/${params.id}`),
                 element: <PlantDetails />
             },
             {
