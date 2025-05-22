@@ -35,6 +35,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/my-plants",
+                loader: () => fetch('http://localhost:3000/plants'),
                 element: <PrivateRoute><MyPlants /></PrivateRoute>
             },
             {
