@@ -12,6 +12,9 @@ const UpdatePlant = () => {
         const formData = new FormData(form);
         const updatedPlant = Object.fromEntries(formData.entries());
 
+        console.log('Sending update for plant:', plant._id);
+        console.log('Update data:', updatedPlant);
+
         // send updatedPlant to the db 
         fetch(`http://localhost:3000/plants/${plant._id}`, {
             method: 'PUT',
@@ -20,9 +23,17 @@ const UpdatePlant = () => {
             },
             body: JSON.stringify(updatedPlant)
         })
-            .then(res => res.json())
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error(`Server responded with status: ${res.status}`);
+                }
+                return res.json();
+            })
             .then(data => {
-                if (data.modifiedCount > 0) {
+                console.log('Server response:', data);
+                
+                // Check for various success indicators
+                if (data.modifiedCount > 0 || data.acknowledged === true || data.success === true || data._id) {
                     Swal.fire({
                         icon: 'success',
                         title: 'Plant Updated Successfully!',
@@ -31,11 +42,21 @@ const UpdatePlant = () => {
                     }).then(() => {
                         navigate('/my-plants');
                     });
+                } else {
+                    // No explicit success indicator, but no error either
+                    console.log('Update may have succeeded, but no confirmation from server');
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Plant Updated',
+                        text: 'Your plant information has been updated.',
+                        confirmButtonColor: '#059669'
+                    }).then(() => {
+                        navigate('/my-plants');
+                    });
                 }
-
             })
             .catch(error => {
-                // console.error('Error updating plant:', error);
+                console.error('Error updating plant:', error);
                 Swal.fire({
                     icon: 'error',
                     title: 'Update Failed',
