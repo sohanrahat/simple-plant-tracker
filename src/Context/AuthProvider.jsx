@@ -69,7 +69,6 @@ const AuthProvider = ({ children }) => {
                     photoURL: currentUser.photoURL || 'https://i.ibb.co/MBtjqXQ/no-avatar.gif'
                 };
 
-                // console.log("Setting user state with:", userObj);
                 localStorage.setItem('plantPlanetUser', JSON.stringify(userObj));
                 setUser(userObj);
             } else {

@@ -34,19 +34,18 @@ const AddPlant = () => {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Something went wrong! Check console for details.',
+                    text: 'Something went wrong!',
                     confirmButtonColor: '#059669'
                 });
             });
     };
-    
+
     return (
         <div className={`max-w-4xl my-3 mx-auto p-6 ${isDarkMode ? 'bg-gray-800' : 'bg-green-50'}`}>
             <h2 className={`text-3xl font-bold text-center mb-8 ${isDarkMode ? 'text-green-400' : 'text-green-800'}`}>Add a New Plant</h2>
 
-            <form onSubmit={handleAddPlant} className={`space-y-6 p-8 rounded-lg shadow-md border-2 ${
-                isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-green-200'
-            }`}>
+            <form onSubmit={handleAddPlant} className={`space-y-6 p-8 rounded-lg shadow-md border-2 ${isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-green-200'
+                }`}>
                 {/* Plant Name */}
                 <div className="form-control">
                     <label className="label">
@@ -56,9 +55,8 @@ const AddPlant = () => {
                         type="text"
                         name="plantName"
                         placeholder="Enter plant name"
-                        className={`input input-bordered w-full focus:border-green-500 ${
-                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : ''
-                        }`}
+                        className={`input input-bordered w-full focus:border-green-500 ${isDarkMode ? 'bg-gray-600 text-white border-gray-500' : ''
+                            }`}
                         required
                     />
                 </div>
@@ -72,9 +70,8 @@ const AddPlant = () => {
                         type="text"
                         name="image"
                         placeholder="Enter image URL"
-                        className={`input input-bordered w-full focus:border-green-500 ${
-                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : ''
-                        }`}
+                        className={`input input-bordered w-full focus:border-green-500 ${isDarkMode ? 'bg-gray-600 text-white border-gray-500' : ''
+                            }`}
                         required
                     />
                 </div>
@@ -86,9 +83,8 @@ const AddPlant = () => {
                     </label>
                     <select
                         name="category"
-                        className={`select select-bordered w-full focus:border-green-500 ${
-                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : 'bg-green-50'
-                        }`}
+                        className={`select select-bordered w-full focus:border-green-500 ${isDarkMode ? 'bg-gray-600 text-white border-gray-500' : 'bg-green-50'
+                            }`}
                         required
                     >
                         <option value="" disabled>Select a category</option>
@@ -111,9 +107,8 @@ const AddPlant = () => {
                     <textarea
                         name="description"
                         placeholder="Enter plant description"
-                        className={`textarea textarea-bordered w-full h-24 focus:border-green-500 ${
-                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : 'bg-green-50'
-                        }`}
+                        className={`textarea textarea-bordered w-full h-24 focus:border-green-500 ${isDarkMode ? 'bg-gray-600 text-white border-gray-500' : 'bg-green-50'
+                            }`}
                         required
                     ></textarea>
                 </div>
@@ -125,9 +120,8 @@ const AddPlant = () => {
                     </label>
                     <select
                         name="careLevel"
-                        className={`select select-bordered w-full focus:border-green-500 ${
-                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : 'bg-green-50'
-                        }`}
+                        className={`select select-bordered w-full focus:border-green-500 ${isDarkMode ? 'bg-gray-600 text-white border-gray-500' : 'bg-green-50'
+                            }`}
                         required
                     >
                         <option value="" disabled>Select care level</option>
@@ -146,9 +140,8 @@ const AddPlant = () => {
                         type="text"
                         name="wateringFrequency"
                         placeholder="e.g., every 3 days"
-                        className={`input input-bordered w-full focus:border-green-500 ${
-                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : ''
-                        }`}
+                        className={`input input-bordered w-full focus:border-green-500 ${isDarkMode ? 'bg-gray-600 text-white border-gray-500' : ''
+                            }`}
                         required
                     />
                 </div>
@@ -161,9 +154,8 @@ const AddPlant = () => {
                     <input
                         type="date"
                         name="lastWateredDate"
-                        className={`input input-bordered w-full focus:border-green-500 ${
-                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : 'bg-blue-50'
-                        }`}
+                        className={`input input-bordered w-full focus:border-green-500 ${isDarkMode ? 'bg-gray-600 text-white border-gray-500' : 'bg-blue-50'
+                            }`}
                         required
                     />
                 </div>
@@ -176,9 +168,8 @@ const AddPlant = () => {
                     <input
                         type="date"
                         name="nextWateringDate"
-                        className={`input input-bordered w-full focus:border-green-500 ${
-                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : 'bg-blue-50'
-                        }`}
+                        className={`input input-bordered w-full focus:border-green-500 ${isDarkMode ? 'bg-gray-600 text-white border-gray-500' : 'bg-blue-50'
+                            }`}
                         required
                     />
                 </div>
@@ -192,9 +183,8 @@ const AddPlant = () => {
                         type="text"
                         name="healthStatus"
                         placeholder="Enter plant health status"
-                        className={`input input-bordered w-full focus:border-green-500 ${
-                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : ''
-                        }`}
+                        className={`input input-bordered w-full focus:border-green-500 ${isDarkMode ? 'bg-gray-600 text-white border-gray-500' : ''
+                            }`}
                         required
                     />
                 </div>
@@ -208,9 +198,8 @@ const AddPlant = () => {
                         type="email"
                         name="userEmail"
                         placeholder="Enter your email"
-                        className={`input input-bordered w-full focus:border-green-500 ${
-                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : ''
-                        }`}
+                        className={`input input-bordered w-full focus:border-green-500 ${isDarkMode ? 'bg-gray-600 text-white border-gray-500' : ''
+                            }`}
                         required
                     />
                 </div>
@@ -224,18 +213,16 @@ const AddPlant = () => {
                         type="text"
                         name="userName"
                         placeholder="Enter your name"
-                        className={`input input-bordered w-full focus:border-green-500 ${
-                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : ''
-                        }`}
+                        className={`input input-bordered w-full focus:border-green-500 ${isDarkMode ? 'bg-gray-600 text-white border-gray-500' : ''
+                            }`}
                         required
                     />
                 </div>
 
                 {/* Submit Button */}
                 <div className="form-control mt-8">
-                    <button type="submit" className={`btn w-full border-none ${
-                        isDarkMode ? 'bg-green-700 hover:bg-green-600' : 'bg-green-600 hover:bg-green-700'
-                    } text-white`}>Add Plant</button>
+                    <button type="submit" className={`btn w-full border-none ${isDarkMode ? 'bg-green-700 hover:bg-green-600' : 'bg-green-600 hover:bg-green-700'
+                        } text-white`}>Add Plant</button>
                 </div>
             </form>
         </div>
