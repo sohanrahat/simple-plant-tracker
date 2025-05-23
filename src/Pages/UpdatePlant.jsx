@@ -14,7 +14,7 @@ const UpdatePlant = () => {
         const formData = new FormData(form);
         const updatedPlant = Object.fromEntries(formData.entries());
 
-        fetch(`http://localhost:3000/plants/${plant._id}`, {
+        fetch(`https://ten-mango-server.vercel.app/plants/${plant._id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -62,9 +62,8 @@ const UpdatePlant = () => {
         <div className={`max-w-4xl my-3 mx-auto p-6 ${isDarkMode ? 'bg-gray-800' : 'bg-green-50'}`}>
             <h2 className={`text-3xl font-bold text-center mb-8 ${isDarkMode ? 'text-green-400' : 'text-green-800'}`}>Update Plant</h2>
 
-            <form onSubmit={handleUpdatePlant} className={`space-y-6 p-8 rounded-lg shadow-md border-2 ${
-                isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-green-200'
-            }`}>
+            <form onSubmit={handleUpdatePlant} className={`space-y-6 p-8 rounded-lg shadow-md border-2 ${isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-green-200'
+                }`}>
                 {/* Plant Name */}
                 <div className="form-control">
                     <label className="label">
@@ -75,9 +74,8 @@ const UpdatePlant = () => {
                         name="plantName"
                         defaultValue={plant?.plantName}
                         placeholder="Enter plant name"
-                        className={`input input-bordered w-full focus:border-green-500 ${
-                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : ''
-                        }`}
+                        className={`input input-bordered w-full focus:border-green-500 ${isDarkMode ? 'bg-gray-600 text-white border-gray-500' : ''
+                            }`}
                         required
                     />
                 </div>
@@ -92,9 +90,8 @@ const UpdatePlant = () => {
                         name="image"
                         defaultValue={plant?.image}
                         placeholder="Enter image URL"
-                        className={`input input-bordered w-full focus:border-green-500 ${
-                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : ''
-                        }`}
+                        className={`input input-bordered w-full focus:border-green-500 ${isDarkMode ? 'bg-gray-600 text-white border-gray-500' : ''
+                            }`}
                         required
                     />
                 </div>
@@ -107,9 +104,8 @@ const UpdatePlant = () => {
                     <select
                         name="category"
                         defaultValue={plant?.category}
-                        className={`select select-bordered w-full focus:border-green-500 ${
-                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : 'bg-green-50'
-                        }`}
+                        className={`select select-bordered w-full focus:border-green-500 ${isDarkMode ? 'bg-gray-600 text-white border-gray-500' : 'bg-green-50'
+                            }`}
                         required
                     >
                         <option value="" disabled>Select a category</option>
@@ -133,9 +129,8 @@ const UpdatePlant = () => {
                         name="description"
                         defaultValue={plant?.description}
                         placeholder="Enter plant description"
-                        className={`textarea textarea-bordered w-full h-24 focus:border-green-500 ${
-                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : 'bg-green-50'
-                        }`}
+                        className={`textarea textarea-bordered w-full h-24 focus:border-green-500 ${isDarkMode ? 'bg-gray-600 text-white border-gray-500' : 'bg-green-50'
+                            }`}
                         required
                     ></textarea>
                 </div>
@@ -148,9 +143,8 @@ const UpdatePlant = () => {
                     <select
                         name="careLevel"
                         defaultValue={plant?.careLevel}
-                        className={`select select-bordered w-full focus:border-green-500 ${
-                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : 'bg-green-50'
-                        }`}
+                        className={`select select-bordered w-full focus:border-green-500 ${isDarkMode ? 'bg-gray-600 text-white border-gray-500' : 'bg-green-50'
+                            }`}
                         required
                     >
                         <option value="" disabled>Select care level</option>
@@ -170,9 +164,8 @@ const UpdatePlant = () => {
                         name="wateringFrequency"
                         defaultValue={plant?.wateringFrequency}
                         placeholder="e.g., every 3 days"
-                        className={`input input-bordered w-full focus:border-green-500 ${
-                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : ''
-                        }`}
+                        className={`input input-bordered w-full focus:border-green-500 ${isDarkMode ? 'bg-gray-600 text-white border-gray-500' : ''
+                            }`}
                         required
                     />
                 </div>
@@ -186,9 +179,8 @@ const UpdatePlant = () => {
                         type="date"
                         name="lastWateredDate"
                         defaultValue={plant?.lastWateredDate}
-                        className={`input input-bordered w-full focus:border-green-500 ${
-                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : 'bg-blue-50'
-                        }`}
+                        className={`input input-bordered w-full focus:border-green-500 ${isDarkMode ? 'bg-gray-600 text-white border-gray-500' : 'bg-blue-50'
+                            }`}
                         required
                     />
                 </div>
@@ -202,9 +194,8 @@ const UpdatePlant = () => {
                         type="date"
                         name="nextWateringDate"
                         defaultValue={plant?.nextWateringDate}
-                        className={`input input-bordered w-full focus:border-green-500 ${
-                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : 'bg-blue-50'
-                        }`}
+                        className={`input input-bordered w-full focus:border-green-500 ${isDarkMode ? 'bg-gray-600 text-white border-gray-500' : 'bg-blue-50'
+                            }`}
                         required
                     />
                 </div>
@@ -219,9 +210,8 @@ const UpdatePlant = () => {
                         name="healthStatus"
                         defaultValue={plant?.healthStatus}
                         placeholder="Enter plant health status"
-                        className={`input input-bordered w-full focus:border-green-500 ${
-                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : ''
-                        }`}
+                        className={`input input-bordered w-full focus:border-green-500 ${isDarkMode ? 'bg-gray-600 text-white border-gray-500' : ''
+                            }`}
                         required
                     />
                 </div>
@@ -235,9 +225,8 @@ const UpdatePlant = () => {
                         type="email"
                         name="userEmail"
                         defaultValue={plant?.userEmail}
-                        className={`input input-bordered w-full ${
-                            isDarkMode ? 'bg-gray-800 text-gray-400 border-gray-500' : 'bg-gray-100'
-                        }`}
+                        className={`input input-bordered w-full ${isDarkMode ? 'bg-gray-800 text-gray-400 border-gray-500' : 'bg-gray-100'
+                            }`}
                         readOnly
                     />
                 </div>
@@ -251,18 +240,16 @@ const UpdatePlant = () => {
                         type="text"
                         name="userName"
                         defaultValue={plant?.userName}
-                        className={`input input-bordered w-full ${
-                            isDarkMode ? 'bg-gray-800 text-gray-400 border-gray-500' : 'bg-gray-100'
-                        }`}
+                        className={`input input-bordered w-full ${isDarkMode ? 'bg-gray-800 text-gray-400 border-gray-500' : 'bg-gray-100'
+                            }`}
                         readOnly
                     />
                 </div>
 
                 {/* Submit Button */}
                 <div className="form-control mt-8">
-                    <button type="submit" className={`btn w-full border-none ${
-                        isDarkMode ? 'bg-green-700 hover:bg-green-600' : 'bg-green-600 hover:bg-green-700'
-                    } text-white`}>Update Plant</button>
+                    <button type="submit" className={`btn w-full border-none ${isDarkMode ? 'bg-green-700 hover:bg-green-600' : 'bg-green-600 hover:bg-green-700'
+                        } text-white`}>Update Plant</button>
                 </div>
             </form>
         </div>

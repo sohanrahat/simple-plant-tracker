@@ -11,7 +11,7 @@ const PlantDetails = () => {
 
     useEffect(() => {
         // console.log("Fetching plant with ID:", id);
-        fetch(`http://localhost:3000/plants/${id}`)
+        fetch(`https://ten-mango-server.vercel.app/plants/${id}`)
             .then(res => {
                 if (!res.ok) {
                     throw new Error(`HTTP error! Status: ${res.status}`);
@@ -66,8 +66,8 @@ const PlantDetails = () => {
                                 {plant.category}
                             </span>
                             <span className={`ml-2 px-2 py-1 rounded-full text-xs ${plant.careLevel === 'easy' ? 'bg-green-100 text-green-800' :
-                                    plant.careLevel === 'moderate' ? 'bg-yellow-100 text-yellow-800' :
-                                        'bg-red-100 text-red-800'
+                                plant.careLevel === 'moderate' ? 'bg-yellow-100 text-yellow-800' :
+                                    'bg-red-100 text-red-800'
                                 }`}>
                                 {plant.careLevel} care
                             </span>

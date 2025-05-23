@@ -12,7 +12,7 @@ const AddPlant = () => {
         const formData = new FormData(form);
         const newPlant = Object.fromEntries(formData.entries());
 
-        fetch('http://localhost:3000/plants', {
+        fetch('https://ten-mango-server.vercel.app/plants', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

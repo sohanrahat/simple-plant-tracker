@@ -20,22 +20,22 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                loader: () => fetch('http://localhost:3000/plants'),
+                loader: () => fetch('https://ten-mango-server.vercel.app/plants'),
                 element: <Home />
             },
             {
                 path: "/all-plants",
-                loader: () => fetch('http://localhost:3000/plants'),
+                loader: () => fetch('https://ten-mango-server.vercel.app/plants'),
                 element: <AllPlants />,
             },
             {
                 path: "/plant-details/:id",
-                loader: ({ params }) => fetch(`http://localhost:3000/plants/${params.id}`),
+                loader: ({ params }) => fetch(`https://ten-mango-server.vercel.app/plants/${params.id}`),
                 element: <PlantDetails />
             },
             {
                 path: "/my-plants",
-                loader: () => fetch('http://localhost:3000/plants'),
+                loader: () => fetch('https://ten-mango-server.vercel.app/plants'),
                 element: <PrivateRoute><MyPlants /></PrivateRoute>
             },
             {
@@ -44,7 +44,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/update-plant/:id",
-                loader: ({ params }) => fetch(`http://localhost:3000/plants/${params.id}`),
+                loader: ({ params }) => fetch(`https://ten-mango-server.vercel.app/plants/${params.id}`),
                 element: <PrivateRoute><UpdatePlant /></PrivateRoute>
             },
             {
