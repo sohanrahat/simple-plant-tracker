@@ -1,9 +1,11 @@
 import React, { useState, useMemo } from 'react';
 import { useLoaderData } from 'react-router';
 import { Link } from 'react-router';
+import { useTheme } from '../Context/ThemeContext';
 
 const AllPlants = () => {
     const loadedPlants = useLoaderData();
+    const { isDarkMode } = useTheme();
     const [sortField, setSortField] = useState('plantName');
     const [sortDirection, setSortDirection] = useState('asc');
 
@@ -104,7 +106,7 @@ const AllPlants = () => {
                     </thead>
                     <tbody>
                         {plants.map(plant => (
-                            <tr key={plant._id} className="border-b hover:bg-green-50">
+                            <tr key={plant._id} className={`border-b ${!isDarkMode && 'hover:bg-green-50'}`}>
                                 <td className="p-3">
                                     <div className="flex items-center space-x-3">
                                         <div className="avatar">

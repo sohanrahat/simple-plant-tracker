@@ -1,7 +1,9 @@
 import Swal from 'sweetalert2';
 import React, { useState } from 'react';
+import { useTheme } from '../Context/ThemeContext';
 
 const AddPlant = () => {
+    const { isDarkMode } = useTheme();
 
     const handleAddPlant = (e) => {
         e.preventDefault();
@@ -9,10 +11,6 @@ const AddPlant = () => {
         const form = e.target;
         const formData = new FormData(form);
         const newPlant = Object.fromEntries(formData.entries());
-        // console.log(newPlant);
-
-
-        // sending newPlant to the server db
 
         fetch('http://localhost:3000/plants', {
             method: 'POST',
@@ -23,7 +21,6 @@ const AddPlant = () => {
         })
             .then(res => res.json())
             .then(data => {
-
                 if (data.insertedId) {
                     Swal.fire({
                         icon: 'success',
@@ -31,12 +28,9 @@ const AddPlant = () => {
                         confirmButtonColor: '#059669'
                     })
                     form.reset();
-                } else {
-                    // console.warn('No insertedId in response:', data);
                 }
             })
             .catch(error => {
-                // console.error("Error adding plant:", error);
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
@@ -44,40 +38,43 @@ const AddPlant = () => {
                     confirmButtonColor: '#059669'
                 });
             });
-
     };
-
+    
     return (
-        <div className="max-w-4xl my-3 mx-auto p-6 bg-green-50">
-            <h2 className="text-3xl font-bold text-center mb-8 text-green-800">Add a New Plant</h2>
+        <div className={`max-w-4xl my-3 mx-auto p-6 ${isDarkMode ? 'bg-gray-800' : 'bg-green-50'}`}>
+            <h2 className={`text-3xl font-bold text-center mb-8 ${isDarkMode ? 'text-green-400' : 'text-green-800'}`}>Add a New Plant</h2>
 
-            <form onSubmit={handleAddPlant} className="space-y-6 bg-white p-8 rounded-lg shadow-md border-2 border-green-200">
-
+            <form onSubmit={handleAddPlant} className={`space-y-6 p-8 rounded-lg shadow-md border-2 ${
+                isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-green-200'
+            }`}>
                 {/* Plant Name */}
                 <div className="form-control">
                     <label className="label">
-                        <span className="label-text font-medium text-green-700">Plant Name</span>
+                        <span className={`label-text font-medium ${isDarkMode ? 'text-green-400' : 'text-green-700'}`}>Plant Name</span>
                     </label>
                     <input
                         type="text"
                         name="plantName"
-
                         placeholder="Enter plant name"
-                        className="input input-bordered w-full focus:border-green-500"
+                        className={`input input-bordered w-full focus:border-green-500 ${
+                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : ''
+                        }`}
                         required
                     />
                 </div>
+
                 {/* Image URL Input */}
                 <div className="form-control">
                     <label className="label">
-                        <span className="label-text font-medium text-green-700">Plant Image URL</span>
+                        <span className={`label-text font-medium ${isDarkMode ? 'text-green-400' : 'text-green-700'}`}>Plant Image URL</span>
                     </label>
                     <input
                         type="text"
                         name="image"
-
                         placeholder="Enter image URL"
-                        className="input input-bordered w-full focus:border-green-500 focus:ring-green-500"
+                        className={`input input-bordered w-full focus:border-green-500 ${
+                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : ''
+                        }`}
                         required
                     />
                 </div>
@@ -85,12 +82,13 @@ const AddPlant = () => {
                 {/* Category Dropdown */}
                 <div className="form-control">
                     <label className="label">
-                        <span className="label-text font-medium text-green-700">Category</span>
+                        <span className={`label-text font-medium ${isDarkMode ? 'text-green-400' : 'text-green-700'}`}>Category</span>
                     </label>
                     <select
                         name="category"
-
-                        className="select select-bordered w-full focus:border-green-500 bg-green-50"
+                        className={`select select-bordered w-full focus:border-green-500 ${
+                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : 'bg-green-50'
+                        }`}
                         required
                     >
                         <option value="" disabled>Select a category</option>
@@ -108,13 +106,14 @@ const AddPlant = () => {
                 {/* Description */}
                 <div className="form-control">
                     <label className="label">
-                        <span className="label-text font-medium text-green-700">Description</span>
+                        <span className={`label-text font-medium ${isDarkMode ? 'text-green-400' : 'text-green-700'}`}>Description</span>
                     </label>
                     <textarea
                         name="description"
-
                         placeholder="Enter plant description"
-                        className="textarea textarea-bordered w-full h-24 focus:border-green-500 bg-green-50"
+                        className={`textarea textarea-bordered w-full h-24 focus:border-green-500 ${
+                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : 'bg-green-50'
+                        }`}
                         required
                     ></textarea>
                 </div>
@@ -122,32 +121,34 @@ const AddPlant = () => {
                 {/* Care Level Dropdown */}
                 <div className="form-control">
                     <label className="label">
-                        <span className="label-text font-medium text-green-700">Care Level</span>
+                        <span className={`label-text font-medium ${isDarkMode ? 'text-green-400' : 'text-green-700'}`}>Care Level</span>
                     </label>
                     <select
                         name="careLevel"
-
-                        className="select select-bordered w-full focus:border-green-500 bg-green-50"
+                        className={`select select-bordered w-full focus:border-green-500 ${
+                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : 'bg-green-50'
+                        }`}
                         required
                     >
                         <option value="" disabled>Select care level</option>
-                        <option value="easy" className="text-green-600">Easy</option>
-                        <option value="moderate" className="text-yellow-600">Moderate</option>
-                        <option value="difficult" className="text-red-600">Difficult</option>
+                        <option value="easy" className={isDarkMode ? 'text-green-400' : 'text-green-600'}>Easy</option>
+                        <option value="moderate" className={isDarkMode ? 'text-yellow-400' : 'text-yellow-600'}>Moderate</option>
+                        <option value="difficult" className={isDarkMode ? 'text-red-400' : 'text-red-600'}>Difficult</option>
                     </select>
                 </div>
 
                 {/* Watering Frequency */}
                 <div className="form-control">
                     <label className="label">
-                        <span className="label-text font-medium text-green-700">Watering Frequency</span>
+                        <span className={`label-text font-medium ${isDarkMode ? 'text-green-400' : 'text-green-700'}`}>Watering Frequency</span>
                     </label>
                     <input
                         type="text"
                         name="wateringFrequency"
-
                         placeholder="e.g., every 3 days"
-                        className="input input-bordered w-full focus:border-green-500 focus:ring-blue-500"
+                        className={`input input-bordered w-full focus:border-green-500 ${
+                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : ''
+                        }`}
                         required
                     />
                 </div>
@@ -155,13 +156,14 @@ const AddPlant = () => {
                 {/* Last Watered Date */}
                 <div className="form-control">
                     <label className="label">
-                        <span className="label-text font-medium text-green-700">Last Watered Date</span>
+                        <span className={`label-text font-medium ${isDarkMode ? 'text-green-400' : 'text-green-700'}`}>Last Watered Date</span>
                     </label>
                     <input
                         type="date"
                         name="lastWateredDate"
-
-                        className="input input-bordered w-full focus:border-green-500 bg-blue-50"
+                        className={`input input-bordered w-full focus:border-green-500 ${
+                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : 'bg-blue-50'
+                        }`}
                         required
                     />
                 </div>
@@ -169,13 +171,14 @@ const AddPlant = () => {
                 {/* Next Watering Date */}
                 <div className="form-control">
                     <label className="label">
-                        <span className="label-text font-medium text-green-700">Next Watering Date</span>
+                        <span className={`label-text font-medium ${isDarkMode ? 'text-green-400' : 'text-green-700'}`}>Next Watering Date</span>
                     </label>
                     <input
                         type="date"
                         name="nextWateringDate"
-
-                        className="input input-bordered w-full focus:border-green-500 bg-blue-50"
+                        className={`input input-bordered w-full focus:border-green-500 ${
+                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : 'bg-blue-50'
+                        }`}
                         required
                     />
                 </div>
@@ -183,14 +186,15 @@ const AddPlant = () => {
                 {/* Health Status */}
                 <div className="form-control">
                     <label className="label">
-                        <span className="label-text font-medium text-green-700">Health Status</span>
+                        <span className={`label-text font-medium ${isDarkMode ? 'text-green-400' : 'text-green-700'}`}>Health Status</span>
                     </label>
                     <input
                         type="text"
                         name="healthStatus"
-
                         placeholder="Enter plant health status"
-                        className="input input-bordered w-full focus:border-green-500"
+                        className={`input input-bordered w-full focus:border-green-500 ${
+                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : ''
+                        }`}
                         required
                     />
                 </div>
@@ -198,14 +202,15 @@ const AddPlant = () => {
                 {/* User Email */}
                 <div className="form-control">
                     <label className="label">
-                        <span className="label-text font-medium text-green-700">User Email</span>
+                        <span className={`label-text font-medium ${isDarkMode ? 'text-green-400' : 'text-green-700'}`}>User Email</span>
                     </label>
                     <input
                         type="email"
                         name="userEmail"
-
                         placeholder="Enter your email"
-                        className="input input-bordered w-full focus:border-green-500"
+                        className={`input input-bordered w-full focus:border-green-500 ${
+                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : ''
+                        }`}
                         required
                     />
                 </div>
@@ -213,21 +218,24 @@ const AddPlant = () => {
                 {/* User Name */}
                 <div className="form-control">
                     <label className="label">
-                        <span className="label-text font-medium text-green-700">User Name</span>
+                        <span className={`label-text font-medium ${isDarkMode ? 'text-green-400' : 'text-green-700'}`}>User Name</span>
                     </label>
                     <input
                         type="text"
                         name="userName"
-
                         placeholder="Enter your name"
-                        className="input input-bordered w-full focus:border-green-500"
+                        className={`input input-bordered w-full focus:border-green-500 ${
+                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : ''
+                        }`}
                         required
                     />
                 </div>
 
                 {/* Submit Button */}
                 <div className="form-control mt-8">
-                    <button type="submit" className="btn bg-green-600 hover:bg-green-700 text-white border-none w-full">Add Plant</button>
+                    <button type="submit" className={`btn w-full border-none ${
+                        isDarkMode ? 'bg-green-700 hover:bg-green-600' : 'bg-green-600 hover:bg-green-700'
+                    } text-white`}>Add Plant</button>
                 </div>
             </form>
         </div>
