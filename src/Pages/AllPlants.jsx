@@ -70,10 +70,10 @@ const AllPlants = () => {
                             <label tabIndex={0} className="btn btn-sm bg-green-600 hover:bg-green-700 text-white m-1">
                                 Sort by: {sortField} {sortDirection === 'asc' ? '↑' : '↓'}
                             </label>
-                            <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                                <li><button onClick={() => handleSort('plantName')}>Plant Name</button></li>
-                                <li><button onClick={() => handleSort('wateringFrequency')}>Watering Frequency</button></li>
-                                <li><button onClick={() => handleSort('careLevel')}>Care Level</button></li>
+                            <ul tabIndex={0} className={`dropdown-content z-[1] menu p-2 shadow rounded-box w-52 ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-base-100'}`}>
+                                <li><button onClick={() => { handleSort('plantName'); document.activeElement.blur(); }} className={isDarkMode ? 'hover:bg-gray-700' : ''}>Plant Name</button></li>
+                                <li><button onClick={() => { handleSort('wateringFrequency'); document.activeElement.blur(); }} className={isDarkMode ? 'hover:bg-gray-700' : ''}>Watering Frequency</button></li>
+                                <li><button onClick={() => { handleSort('careLevel'); document.activeElement.blur(); }} className={isDarkMode ? 'hover:bg-gray-700' : ''}>Care Level</button></li>
                             </ul>
                         </div>
                     </div>
