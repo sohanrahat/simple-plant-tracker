@@ -1,10 +1,12 @@
 import React from 'react';
 import { useLoaderData, useNavigate } from 'react-router';
+import { useTheme } from '../Context/ThemeContext';
 import Swal from 'sweetalert2';
 
 const UpdatePlant = () => {
     const navigate = useNavigate();
     const plant = useLoaderData();
+    const { isDarkMode } = useTheme();
 
     const handleUpdatePlant = (e) => {
         e.preventDefault();
@@ -12,10 +14,6 @@ const UpdatePlant = () => {
         const formData = new FormData(form);
         const updatedPlant = Object.fromEntries(formData.entries());
 
-        console.log('Sending update for plant:', plant._id);
-        console.log('Update data:', updatedPlant);
-
-        // send updatedPlant to the db 
         fetch(`http://localhost:3000/plants/${plant._id}`, {
             method: 'PUT',
             headers: {
@@ -30,9 +28,6 @@ const UpdatePlant = () => {
                 return res.json();
             })
             .then(data => {
-                console.log('Server response:', data);
-
-                // Check for various success indicators
                 if (data.modifiedCount > 0 || data.acknowledged === true || data.success === true || data._id) {
                     Swal.fire({
                         icon: 'success',
@@ -43,7 +38,6 @@ const UpdatePlant = () => {
                         navigate('/my-plants');
                     });
                 } else {
-                    console.log('Update may have succeeded, but no confirmation from server');
                     Swal.fire({
                         icon: 'success',
                         title: 'Plant Updated',
@@ -55,7 +49,6 @@ const UpdatePlant = () => {
                 }
             })
             .catch(error => {
-                console.error('Error updating plant:', error);
                 Swal.fire({
                     icon: 'error',
                     title: 'Update Failed',
@@ -63,27 +56,28 @@ const UpdatePlant = () => {
                     confirmButtonColor: '#059669'
                 });
             });
-
-
     };
 
     return (
-        <div className="max-w-4xl my-3 mx-auto p-6 bg-green-50">
-            <h2 className="text-3xl font-bold text-center mb-8 text-green-800">Update Plant</h2>
+        <div className={`max-w-4xl my-3 mx-auto p-6 ${isDarkMode ? 'bg-gray-800' : 'bg-green-50'}`}>
+            <h2 className={`text-3xl font-bold text-center mb-8 ${isDarkMode ? 'text-green-400' : 'text-green-800'}`}>Update Plant</h2>
 
-            <form onSubmit={handleUpdatePlant} className="space-y-6 bg-white p-8 rounded-lg shadow-md border-2 border-green-200">
-
+            <form onSubmit={handleUpdatePlant} className={`space-y-6 p-8 rounded-lg shadow-md border-2 ${
+                isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-green-200'
+            }`}>
                 {/* Plant Name */}
                 <div className="form-control">
                     <label className="label">
-                        <span className="label-text font-medium text-green-700">Plant Name</span>
+                        <span className={`label-text font-medium ${isDarkMode ? 'text-green-400' : 'text-green-700'}`}>Plant Name</span>
                     </label>
                     <input
                         type="text"
                         name="plantName"
                         defaultValue={plant?.plantName}
                         placeholder="Enter plant name"
-                        className="input input-bordered w-full focus:border-green-500"
+                        className={`input input-bordered w-full focus:border-green-500 ${
+                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : ''
+                        }`}
                         required
                     />
                 </div>
@@ -91,14 +85,16 @@ const UpdatePlant = () => {
                 {/* Image URL Input */}
                 <div className="form-control">
                     <label className="label">
-                        <span className="label-text font-medium text-green-700">Plant Image URL</span>
+                        <span className={`label-text font-medium ${isDarkMode ? 'text-green-400' : 'text-green-700'}`}>Plant Image URL</span>
                     </label>
                     <input
                         type="text"
                         name="image"
                         defaultValue={plant?.image}
                         placeholder="Enter image URL"
-                        className="input input-bordered w-full focus:border-green-500 focus:ring-green-500"
+                        className={`input input-bordered w-full focus:border-green-500 ${
+                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : ''
+                        }`}
                         required
                     />
                 </div>
@@ -106,12 +102,14 @@ const UpdatePlant = () => {
                 {/* Category Dropdown */}
                 <div className="form-control">
                     <label className="label">
-                        <span className="label-text font-medium text-green-700">Category</span>
+                        <span className={`label-text font-medium ${isDarkMode ? 'text-green-400' : 'text-green-700'}`}>Category</span>
                     </label>
                     <select
                         name="category"
                         defaultValue={plant?.category}
-                        className="select select-bordered w-full focus:border-green-500 bg-green-50"
+                        className={`select select-bordered w-full focus:border-green-500 ${
+                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : 'bg-green-50'
+                        }`}
                         required
                     >
                         <option value="" disabled>Select a category</option>
@@ -129,13 +127,15 @@ const UpdatePlant = () => {
                 {/* Description */}
                 <div className="form-control">
                     <label className="label">
-                        <span className="label-text font-medium text-green-700">Description</span>
+                        <span className={`label-text font-medium ${isDarkMode ? 'text-green-400' : 'text-green-700'}`}>Description</span>
                     </label>
                     <textarea
                         name="description"
                         defaultValue={plant?.description}
                         placeholder="Enter plant description"
-                        className="textarea textarea-bordered w-full h-24 focus:border-green-500 bg-green-50"
+                        className={`textarea textarea-bordered w-full h-24 focus:border-green-500 ${
+                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : 'bg-green-50'
+                        }`}
                         required
                     ></textarea>
                 </div>
@@ -143,32 +143,36 @@ const UpdatePlant = () => {
                 {/* Care Level Dropdown */}
                 <div className="form-control">
                     <label className="label">
-                        <span className="label-text font-medium text-green-700">Care Level</span>
+                        <span className={`label-text font-medium ${isDarkMode ? 'text-green-400' : 'text-green-700'}`}>Care Level</span>
                     </label>
                     <select
                         name="careLevel"
                         defaultValue={plant?.careLevel}
-                        className="select select-bordered w-full focus:border-green-500 bg-green-50"
+                        className={`select select-bordered w-full focus:border-green-500 ${
+                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : 'bg-green-50'
+                        }`}
                         required
                     >
                         <option value="" disabled>Select care level</option>
-                        <option value="easy" className="text-green-600">Easy</option>
-                        <option value="moderate" className="text-yellow-600">Moderate</option>
-                        <option value="difficult" className="text-red-600">Difficult</option>
+                        <option value="easy" className={isDarkMode ? 'text-green-400' : 'text-green-600'}>Easy</option>
+                        <option value="moderate" className={isDarkMode ? 'text-yellow-400' : 'text-yellow-600'}>Moderate</option>
+                        <option value="difficult" className={isDarkMode ? 'text-red-400' : 'text-red-600'}>Difficult</option>
                     </select>
                 </div>
 
                 {/* Watering Frequency */}
                 <div className="form-control">
                     <label className="label">
-                        <span className="label-text font-medium text-green-700">Watering Frequency</span>
+                        <span className={`label-text font-medium ${isDarkMode ? 'text-green-400' : 'text-green-700'}`}>Watering Frequency</span>
                     </label>
                     <input
                         type="text"
                         name="wateringFrequency"
                         defaultValue={plant?.wateringFrequency}
                         placeholder="e.g., every 3 days"
-                        className="input input-bordered w-full focus:border-green-500 focus:ring-blue-500"
+                        className={`input input-bordered w-full focus:border-green-500 ${
+                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : ''
+                        }`}
                         required
                     />
                 </div>
@@ -176,13 +180,15 @@ const UpdatePlant = () => {
                 {/* Last Watered Date */}
                 <div className="form-control">
                     <label className="label">
-                        <span className="label-text font-medium text-green-700">Last Watered Date</span>
+                        <span className={`label-text font-medium ${isDarkMode ? 'text-green-400' : 'text-green-700'}`}>Last Watered Date</span>
                     </label>
                     <input
                         type="date"
                         name="lastWateredDate"
                         defaultValue={plant?.lastWateredDate}
-                        className="input input-bordered w-full focus:border-green-500 bg-blue-50"
+                        className={`input input-bordered w-full focus:border-green-500 ${
+                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : 'bg-blue-50'
+                        }`}
                         required
                     />
                 </div>
@@ -190,13 +196,15 @@ const UpdatePlant = () => {
                 {/* Next Watering Date */}
                 <div className="form-control">
                     <label className="label">
-                        <span className="label-text font-medium text-green-700">Next Watering Date</span>
+                        <span className={`label-text font-medium ${isDarkMode ? 'text-green-400' : 'text-green-700'}`}>Next Watering Date</span>
                     </label>
                     <input
                         type="date"
                         name="nextWateringDate"
                         defaultValue={plant?.nextWateringDate}
-                        className="input input-bordered w-full focus:border-green-500 bg-blue-50"
+                        className={`input input-bordered w-full focus:border-green-500 ${
+                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : 'bg-blue-50'
+                        }`}
                         required
                     />
                 </div>
@@ -204,14 +212,16 @@ const UpdatePlant = () => {
                 {/* Health Status */}
                 <div className="form-control">
                     <label className="label">
-                        <span className="label-text font-medium text-green-700">Health Status</span>
+                        <span className={`label-text font-medium ${isDarkMode ? 'text-green-400' : 'text-green-700'}`}>Health Status</span>
                     </label>
                     <input
                         type="text"
                         name="healthStatus"
                         defaultValue={plant?.healthStatus}
                         placeholder="Enter plant health status"
-                        className="input input-bordered w-full focus:border-green-500"
+                        className={`input input-bordered w-full focus:border-green-500 ${
+                            isDarkMode ? 'bg-gray-600 text-white border-gray-500' : ''
+                        }`}
                         required
                     />
                 </div>
@@ -219,13 +229,15 @@ const UpdatePlant = () => {
                 {/* User Email - Read Only */}
                 <div className="form-control">
                     <label className="label">
-                        <span className="label-text font-medium text-green-700">User Email</span>
+                        <span className={`label-text font-medium ${isDarkMode ? 'text-green-400' : 'text-green-700'}`}>User Email</span>
                     </label>
                     <input
                         type="email"
                         name="userEmail"
                         defaultValue={plant?.userEmail}
-                        className="input input-bordered w-full bg-gray-100"
+                        className={`input input-bordered w-full ${
+                            isDarkMode ? 'bg-gray-800 text-gray-400 border-gray-500' : 'bg-gray-100'
+                        }`}
                         readOnly
                     />
                 </div>
@@ -233,20 +245,24 @@ const UpdatePlant = () => {
                 {/* User Name - Read Only */}
                 <div className="form-control">
                     <label className="label">
-                        <span className="label-text font-medium text-green-700">User Name</span>
+                        <span className={`label-text font-medium ${isDarkMode ? 'text-green-400' : 'text-green-700'}`}>User Name</span>
                     </label>
                     <input
                         type="text"
                         name="userName"
                         defaultValue={plant?.userName}
-                        className="input input-bordered w-full bg-gray-100"
+                        className={`input input-bordered w-full ${
+                            isDarkMode ? 'bg-gray-800 text-gray-400 border-gray-500' : 'bg-gray-100'
+                        }`}
                         readOnly
                     />
                 </div>
 
                 {/* Submit Button */}
                 <div className="form-control mt-8">
-                    <button type="submit" className="btn bg-green-600 hover:bg-green-700 text-white border-none w-full">Update Plant</button>
+                    <button type="submit" className={`btn w-full border-none ${
+                        isDarkMode ? 'bg-green-700 hover:bg-green-600' : 'bg-green-600 hover:bg-green-700'
+                    } text-white`}>Update Plant</button>
                 </div>
             </form>
         </div>
