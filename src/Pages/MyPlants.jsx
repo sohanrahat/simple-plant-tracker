@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useLoaderData, Link } from 'react-router';
 import { AuthContext } from '../Context/AuthProvider';
+import { useTheme } from '../Context/ThemeContext';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 
@@ -8,6 +9,7 @@ import Swal from 'sweetalert2';
 const MyPlants = () => {
     const allPlants = useLoaderData();
     const { user } = useContext(AuthContext);
+    const { isDarkMode } = useTheme();
 
     // Filter plants to show only those added by ME
     const filteredPlants = allPlants.filter(plant => plant.userEmail === user.email);
@@ -45,39 +47,50 @@ const MyPlants = () => {
 
 
     return (
-        <div className="container mx-auto p-4">
-            <h2 className="text-3xl font-bold text-center mb-6 text-green-800">My Plants</h2>
+        <div className={`container mx-auto p-4 ${isDarkMode ? 'bg-gray-900' : ''}`}>
+            <h2 className={`text-3xl font-bold text-center mb-6 ${isDarkMode ? 'text-green-400' : 'text-green-800'}`}>My Plants</h2>
 
             {myPlants.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {myPlants.map(plant => (
-                        <div key={plant._id} className="card bg-base-100 shadow-xl">
+                        <div key={plant._id} className={`card shadow-xl ${isDarkMode ? 'bg-gray-800' : 'bg-base-100'}`}>
                             <figure className="h-48 overflow-hidden">
                                 <img src={plant.image} alt={plant.plantName} className="w-full object-cover" />
                             </figure>
                             <div className="card-body">
-                                <h2 className="card-title">{plant.plantName}</h2>
-                                <p className="capitalize"><span className="font-semibold">Category:</span> {plant.category}</p>
-                                <p><span className="font-semibold">Watering:</span> {plant.wateringFrequency}</p>
+                                <h2 className={`card-title ${isDarkMode ? 'text-white' : ''}`}>{plant.plantName}</h2>
+                                <p className={`capitalize ${isDarkMode ? 'text-gray-300' : ''}`}>
+                                    <span className={`font-semibold ${isDarkMode ? 'text-gray-200' : ''}`}>Category:</span> {plant.category}
+                                </p>
+                                <p className={isDarkMode ? 'text-gray-300' : ''}>
+                                    <span className={`font-semibold ${isDarkMode ? 'text-gray-200' : ''}`}>Watering:</span> {plant.wateringFrequency}
+                                </p>
                                 <p className="flex items-center gap-2">
-                                    <span className="font-semibold">Care Level:</span>
-                                    <span className={`px-2 py-1 rounded-full text-xs ${plant.careLevel === 'easy' ? 'bg-green-100 text-green-800' :
-                                        plant.careLevel === 'moderate' ? 'bg-yellow-100 text-yellow-800' :
-                                            'bg-red-100 text-red-800'
-                                        }`}>
+                                    <span className={`font-semibold ${isDarkMode ? 'text-gray-200' : ''}`}>Care Level:</span>
+                                    <span className={`px-2 py-1 rounded-full text-xs ${
+                                        plant.careLevel === 'easy' 
+                                            ? isDarkMode ? 'bg-green-900 text-green-300' : 'bg-green-100 text-green-800'
+                                            : plant.careLevel === 'moderate'
+                                            ? isDarkMode ? 'bg-yellow-900 text-yellow-300' : 'bg-yellow-100 text-yellow-800'
+                                            : isDarkMode ? 'bg-red-900 text-red-300' : 'bg-red-100 text-red-800'
+                                    }`}>
                                         {plant.careLevel}
                                     </span>
                                 </p>
                                 <div className="card-actions justify-end mt-4">
                                     <Link
                                         to={`/update-plant/${plant._id}`}
-                                        className="btn btn-sm bg-blue-600 hover:bg-blue-700 text-white"
+                                        className={`btn btn-sm text-white ${
+                                            isDarkMode ? 'bg-blue-700 hover:bg-blue-600' : 'bg-blue-600 hover:bg-blue-700'
+                                        }`}
                                     >
                                         <FaEdit className="mr-1" /> Update
                                     </Link>
                                     <button
                                         onClick={() => handleDelete(plant._id)}
-                                        className="btn btn-sm bg-red-600 hover:bg-red-700 text-white"
+                                        className={`btn btn-sm text-white ${
+                                            isDarkMode ? 'bg-red-700 hover:bg-red-600' : 'bg-red-600 hover:bg-red-700'
+                                        }`}
                                     >
                                         <FaTrashAlt className="mr-1" /> Delete
                                     </button>
@@ -88,8 +101,10 @@ const MyPlants = () => {
                 </div>
             ) : (
                 <div className="text-center py-10">
-                    <p className="text-gray-500 mb-4">You haven't added any plants yet</p>
-                    <Link to="/add-plant" className="btn bg-green-600 hover:bg-green-700 text-white">
+                    <p className={isDarkMode ? 'text-gray-400 mb-4' : 'text-gray-500 mb-4'}>You haven't added any plants yet</p>
+                    <Link to="/add-plant" className={`btn text-white ${
+                        isDarkMode ? 'bg-green-700 hover:bg-green-600' : 'bg-green-600 hover:bg-green-700'
+                    }`}>
                         Add Your First Plant
                     </Link>
                 </div>
