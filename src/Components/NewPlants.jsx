@@ -13,7 +13,7 @@ const NewPlants = ({ plants = [] }) => {
     }, []);
 
     return (
-        <section className={`py-12 ${isDarkMode ? 'bg-gray-800' : 'bg-gray-50'}`}>
+        <section className={`${isDarkMode ? 'bg-gray-800' : 'bg-gray-50'}`}>
             <div className="container mx-auto px-4">
                 <h2 className={`text-3xl font-bold text-center mb-8 ${isDarkMode ? 'text-green-400' : 'text-green-800'}`}>
                     New Plants
@@ -54,16 +54,16 @@ const NewPlants = ({ plants = [] }) => {
                                     <div className="flex justify-between items-center mt-4">
                                         <span
                                             className={`px-2 py-1 rounded-full text-xs ${plant.careLevel === 'easy'
+                                                ? isDarkMode
+                                                    ? 'bg-green-800 text-green-100'
+                                                    : 'bg-green-100 text-green-800'
+                                                : plant.careLevel === 'moderate'
                                                     ? isDarkMode
-                                                        ? 'bg-green-800 text-green-100'
-                                                        : 'bg-green-100 text-green-800'
-                                                    : plant.careLevel === 'moderate'
-                                                        ? isDarkMode
-                                                            ? 'bg-yellow-800 text-yellow-100'
-                                                            : 'bg-yellow-100 text-yellow-800'
-                                                        : isDarkMode
-                                                            ? 'bg-red-800 text-red-100'
-                                                            : 'bg-red-100 text-red-800'
+                                                        ? 'bg-yellow-800 text-yellow-100'
+                                                        : 'bg-yellow-100 text-yellow-800'
+                                                    : isDarkMode
+                                                        ? 'bg-red-800 text-red-100'
+                                                        : 'bg-red-100 text-red-800'
                                                 }`}
                                         >
                                             {plant.careLevel} care
@@ -71,8 +71,8 @@ const NewPlants = ({ plants = [] }) => {
                                         <Link
                                             to={`/plant-details/${plant._id}`}
                                             className={`btn btn-sm text-white ${isDarkMode
-                                                    ? 'bg-green-700 hover:bg-green-600'
-                                                    : 'bg-green-600 hover:bg-green-700'
+                                                ? 'bg-green-700 hover:bg-green-600'
+                                                : 'bg-green-600 hover:bg-green-700'
                                                 }`}
                                         >
                                             View Details

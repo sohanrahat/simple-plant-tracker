@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router';
+import { Link, NavLink } from 'react-router';
 import { AuthContext } from '../Context/AuthProvider';
 import { useTheme } from '../Context/ThemeContext';
 
@@ -21,7 +21,7 @@ const Navbar = () => {
 
     return (
         <div>
-            <div className={`navbar shadow-sm ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-base-100'}`}>
+            <div className={`navbar shadow-sm ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-green-100'}`}>
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -30,20 +30,24 @@ const Navbar = () => {
                             </svg>
                         </div>
                         <ul tabIndex={0}
-                            className={`menu menu-sm dropdown-content rounded-box z-1 mt-3 w-52 p-2 shadow ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-base-100'
+                            className={`menu menu-sm dropdown-content rounded-box z-1 mt-3 w-52 p-2 shadow ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-green-100'
                                 }`}>
-                            <li><Link to='/all-plants'>All Plants</Link></li>
-                            <li><Link to='/add-plant'>Add a Plant</Link></li>
-                            <li><Link to='/my-plants'>My Plants</Link></li>
+                            <li><NavLink to='/' className={({ isActive }) => isActive ? 'active' : ''}>Home</NavLink></li>
+                            <li><NavLink to='/all-plants' className={({ isActive }) => isActive ? 'active' : ''}>All Plants</NavLink></li>
+                            <li><NavLink to='/about-us' className={({ isActive }) => isActive ? 'active' : ''}>About Us</NavLink></li>
+                            <li><NavLink to='/add-plant' className={({ isActive }) => isActive ? 'active' : ''}>Add a Plant</NavLink></li>
+                            <li><NavLink to='/my-plants' className={({ isActive }) => isActive ? 'active' : ''}>My Plants</NavLink></li>
                         </ul>
                     </div>
                     <Link to='/' className="btn btn-ghost text-xl">PP</Link>
                 </div>
                 <div className="navbar-center hidden lg:flex justify-center gap-2">
                     <ul className="menu menu-horizontal px-1">
-                        <li><Link to='/all-plants'>All Plants</Link></li>
-                        <li><Link to='/add-plant'>Add a Plant</Link></li>
-                        <li><Link to='/my-plants'>My Plants</Link></li>
+                        <li><NavLink to='/' className={({ isActive }) => isActive ? 'active' : ''}>Home</NavLink></li>
+                        <li><NavLink to='/all-plants' className={({ isActive }) => isActive ? 'active' : ''}>All Plants</NavLink></li>
+                        <li><NavLink to='/about-us' className={({ isActive }) => isActive ? 'active' : ''}>About Us</NavLink></li>
+                        <li><NavLink to='/add-plant' className={({ isActive }) => isActive ? 'active' : ''}>Add a Plant</NavLink></li>
+                        <li><NavLink to='/my-plants' className={({ isActive }) => isActive ? 'active' : ''}>My Plants</NavLink></li>
                     </ul>
                 </div>
                 <div className="navbar-end gap-2">

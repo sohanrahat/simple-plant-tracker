@@ -12,7 +12,7 @@ const Home = () => {
     const { isDarkMode } = useTheme();
 
     return (
-        <div className={isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-800'}>
+        <div className={`space-y-10 ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-800'}`}>
             <Hero />
             <NewPlants plants={recentPlants} />
             <Beginner />

@@ -10,6 +10,7 @@ import PlantDetails from "../Pages/PlantDetails";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import PrivateRoute from "../Context/PrivateRoute";
+import AboutUs from "../Pages/AboutUs";
 
 
 const router = createBrowserRouter([
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
                 path: "/all-plants",
                 loader: () => fetch('https://ten-mango-server.vercel.app/plants'),
                 element: <AllPlants />,
+            },
+            {
+                path: "/about-us",
+                element: <AboutUs />
             },
             {
                 path: "/plant-details/:id",
