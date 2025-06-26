@@ -18,7 +18,7 @@ const Navbar = () => {
     };
 
     const defaultAvatar = "https://i.ibb.co/MBtjqXQ/no-avatar.gif";
-    
+
     return (
         <div>
             <div className={`navbar shadow-sm ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-base-100'}`}>
@@ -30,9 +30,8 @@ const Navbar = () => {
                             </svg>
                         </div>
                         <ul tabIndex={0}
-                            className={`menu menu-sm dropdown-content rounded-box z-1 mt-3 w-52 p-2 shadow ${
-                                isDarkMode ? 'bg-gray-800 text-white' : 'bg-base-100'
-                            }`}>
+                            className={`menu menu-sm dropdown-content rounded-box z-1 mt-3 w-52 p-2 shadow ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-base-100'
+                                }`}>
                             <li><Link to='/all-plants'>All Plants</Link></li>
                             <li><Link to='/add-plant'>Add a Plant</Link></li>
                             <li><Link to='/my-plants'>My Plants</Link></li>

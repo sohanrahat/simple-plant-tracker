@@ -6,7 +6,7 @@ import { useTheme } from '../Context/ThemeContext';
 
 const Root = () => {
     const { isDarkMode } = useTheme();
-    
+
     return (
         <div className={isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-800'}>
             <nav>
