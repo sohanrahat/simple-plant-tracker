@@ -10,6 +10,7 @@ import PlantDetails from "../Pages/PlantDetails";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import PrivateRoute from "../Context/PrivateRoute";
+import AuthLayout from "../Layout/AuthLayout";
 import AboutUs from "../Pages/AboutUs";
 
 
@@ -52,6 +53,12 @@ const router = createBrowserRouter([
                 loader: ({ params }) => fetch(`https://ten-mango-server.vercel.app/plants/${params.id}`),
                 element: <PrivateRoute><UpdatePlant /></PrivateRoute>
             },
+        ]
+
+    },
+    {
+        element: <AuthLayout />,
+        children: [
             {
                 path: "/login",
                 element: <Login />
@@ -60,9 +67,7 @@ const router = createBrowserRouter([
                 path: "/register",
                 element: <Register />
             }
-
         ]
-
     }
 ])
 

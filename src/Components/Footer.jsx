@@ -55,30 +55,27 @@ const Footer = () => {
                             <input
                                 type="email"
                                 placeholder="Your email"
-                                className={`w-full p-2 mb-2 border rounded ${
-                                    isDarkMode 
-                                        ? 'bg-gray-800 text-white border-gray-700 placeholder-gray-400' 
+                                className={`w-full p-2 mb-2 border rounded ${isDarkMode
+                                        ? 'bg-gray-800 text-white border-gray-700 placeholder-gray-400'
                                         : 'bg-white text-gray-800 border-gray-300'
-                                }`}
+                                    }`}
                                 required
                             />
                             <textarea
                                 placeholder="Your message"
-                                className={`w-full p-2 mb-2 border rounded ${
-                                    isDarkMode 
-                                        ? 'bg-gray-800 text-white border-gray-700 placeholder-gray-400' 
+                                className={`w-full p-2 mb-2 border rounded ${isDarkMode
+                                        ? 'bg-gray-800 text-white border-gray-700 placeholder-gray-400'
                                         : 'bg-white text-gray-800 border-gray-300'
-                                }`}
+                                    }`}
                                 rows="2"
                                 required
                             ></textarea>
                             <button
                                 type="submit"
-                                className={`text-white py-2 px-4 rounded transition-colors ${
-                                    isDarkMode 
-                                        ? 'bg-green-700 hover:bg-green-600' 
+                                className={`text-white py-2 px-4 rounded transition-colors ${isDarkMode
+                                        ? 'bg-green-700 hover:bg-green-600'
                                         : 'bg-green-600 hover:bg-green-500'
-                                }`}
+                                    }`}
                             >
                                 Send
                             </button>
