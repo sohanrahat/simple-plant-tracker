@@ -78,65 +78,53 @@ const AllPlants = () => {
                         </div>
                     </div>
 
-                    <div className="overflow-x-auto">
-                        <table className="table w-full border-collapse">
-                            <thead>
-                                <tr className="bg-green-100">
-                                    <th className="p-3 text-left">
-                                        <button className="font-bold flex items-center" onClick={() => handleSort('plantName')}>
-                                            Plant Name
-                                            {sortField === 'plantName' && <span className="ml-1">{sortDirection === 'asc' ? '↑' : '↓'}</span>}
-                                        </button>
-                                    </th>
-                                    <th className="p-3 text-left">Category</th>
-                                    <th className="p-3 text-left">
-                                        <button className="font-bold flex items-center" onClick={() => handleSort('wateringFrequency')}>
-                                            Watering Frequency
-                                            {sortField === 'wateringFrequency' && <span className="ml-1">{sortDirection === 'asc' ? '↑' : '↓'}</span>}
-                                        </button>
-                                    </th>
-                                    <th className="p-3 text-left">
-                                        <button className="font-bold flex items-center" onClick={() => handleSort('careLevel')}>
-                                            Care Level
-                                            {sortField === 'careLevel' && <span className="ml-1">{sortDirection === 'asc' ? '↑' : '↓'}</span>}
-                                        </button>
-                                    </th>
-                                    <th className="p-3 text-center">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {plants.map(plant => (
-                                    <tr key={plant._id} className={`border-b ${!isDarkMode && 'hover:bg-green-50'}`}>
-                                        <td className="p-3">
-                                            <div className="flex items-center space-x-3">
-                                                <div className="avatar">
-                                                    <div className="mask mask-squircle w-12 h-12">
-                                                        <img src={plant.image} alt={plant.plantName} />
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <div className="font-bold">{plant.plantName}</div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td className="p-3 capitalize">{plant.category}</td>
-                                        <td className="p-3">{plant.wateringFrequency}</td>
-                                        <td className="p-3">
-                                            <span className={`px-2 py-1 rounded-full text-xs ${plant.careLevel === 'easy' ? 'bg-green-100 text-green-800' :
-                                                plant.careLevel === 'moderate' ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800'
-                                                }`}>
-                                                {plant.careLevel}
-                                            </span>
-                                        </td>
-                                        <td className="p-3 text-center">
-                                            <Link to={`/plant-details/${plant._id}`} className="btn btn-sm bg-green-600 hover:bg-green-700 text-white">
-                                                View Details
-                                            </Link>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {plants.map(plant => (
+                            <div
+                                key={plant._id}
+                                className={`rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:scale-105 flex flex-col ${isDarkMode ? 'bg-gray-800' : 'bg-white'}`}
+                            >
+                                <div className="h-48 overflow-hidden">
+                                    <img
+                                        src={plant.image || 'https://placehold.co/600x400?text=Plant+Image'}
+                                        alt={plant.plantName}
+                                        className="w-full h-full object-cover"
+                                    />
+                                </div>
+                                <div className="p-4 flex flex-col flex-grow">
+                                    <h3 className={`text-xl font-semibold mb-2 ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
+                                        {plant.plantName}
+                                    </h3>
+                                    <p className={`text-sm capitalize mb-2 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                                        <span className="font-medium">Category:</span> {plant.category}
+                                    </p>
+                                    <p className={`text-sm mb-4 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                                        <span className="font-medium">Watering:</span> {plant.wateringFrequency}
+                                    </p>
+                                    <div className="mt-auto flex justify-between items-center pt-2">
+                                        <span
+                                            className={`px-2 py-1 rounded-full text-xs capitalize ${plant.careLevel === 'easy'
+                                                ? isDarkMode ? 'bg-green-900 text-green-300' : 'bg-green-100 text-green-800'
+                                                : plant.careLevel === 'moderate'
+                                                    ? isDarkMode ? 'bg-yellow-900 text-yellow-300' : 'bg-yellow-100 text-yellow-800'
+                                                    : isDarkMode ? 'bg-red-900 text-red-300' : 'bg-red-100 text-red-800'
+                                                }`}
+                                        >
+                                            {plant.careLevel} Care
+                                        </span>
+                                        <Link
+                                            to={`/plant-details/${plant._id}`}
+                                            className={`btn btn-sm text-white ${isDarkMode
+                                                ? 'bg-green-700 hover:bg-green-600'
+                                                : 'bg-green-600 hover:bg-green-700'
+                                                }`}
+                                        >
+                                            View Details
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
                     </div>
 
                     {plants.length === 0 && (
