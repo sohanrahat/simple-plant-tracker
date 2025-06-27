@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router';
 import { AuthContext } from '../Context/AuthProvider';
 import { useTheme } from '../Context/ThemeContext';
+import logo from '../assets/logo3.png';
 
 const Navbar = () => {
     const { user, loading, logOut } = useContext(AuthContext);
@@ -35,19 +36,26 @@ const Navbar = () => {
                             <li><NavLink to='/' className={({ isActive }) => isActive ? 'active' : ''}>Home</NavLink></li>
                             <li><NavLink to='/all-plants' className={({ isActive }) => isActive ? 'active' : ''}>All Plants</NavLink></li>
                             <li><NavLink to='/about-us' className={({ isActive }) => isActive ? 'active' : ''}>About Us</NavLink></li>
-                            <li><NavLink to='/add-plant' className={({ isActive }) => isActive ? 'active' : ''}>Add a Plant</NavLink></li>
-                            <li><NavLink to='/my-plants' className={({ isActive }) => isActive ? 'active' : ''}>My Plants</NavLink></li>
+                            {user && <>
+                                <li><NavLink to='/add-plant' className={({ isActive }) => isActive ? 'active' : ''}>Add a Plant</NavLink></li>
+                                <li><NavLink to='/my-plants' className={({ isActive }) => isActive ? 'active' : ''}>My Plants</NavLink></li>
+                            </>}
                         </ul>
                     </div>
-                    <Link to='/' className="btn btn-ghost text-xl">PP</Link>
+                    <Link to='/' className="btn btn-ghost text-xl normal-case">
+                        <img src={logo} alt="Plant Planet Logo" className="h-8 w-auto" />
+                        <span className="hidden sm:inline">Plant Planet</span>
+                    </Link>
                 </div>
                 <div className="navbar-center hidden lg:flex justify-center gap-2">
                     <ul className="menu menu-horizontal px-1">
                         <li><NavLink to='/' className={({ isActive }) => isActive ? 'active' : ''}>Home</NavLink></li>
                         <li><NavLink to='/all-plants' className={({ isActive }) => isActive ? 'active' : ''}>All Plants</NavLink></li>
                         <li><NavLink to='/about-us' className={({ isActive }) => isActive ? 'active' : ''}>About Us</NavLink></li>
-                        <li><NavLink to='/add-plant' className={({ isActive }) => isActive ? 'active' : ''}>Add a Plant</NavLink></li>
-                        <li><NavLink to='/my-plants' className={({ isActive }) => isActive ? 'active' : ''}>My Plants</NavLink></li>
+                        {user && <>
+                            <li><NavLink to='/add-plant' className={({ isActive }) => isActive ? 'active' : ''}>Add a Plant</NavLink></li>
+                            <li><NavLink to='/my-plants' className={({ isActive }) => isActive ? 'active' : ''}>My Plants</NavLink></li>
+                        </>}
                     </ul>
                 </div>
                 <div className="navbar-end gap-2">
