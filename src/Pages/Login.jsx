@@ -98,7 +98,10 @@ const Login = () => {
     };
 
     return (
-        <div className="flex min-h-screen">
+        // This container creates a card-like effect for the login page,
+        // centered within the AuthLayout. The min-h-screen is removed
+        // to prevent layout issues with the sticky Navbar.
+        <div className="w-11/12 mx-auto flex my-10 rounded-lg shadow-lg overflow-hidden">
             {/* Left side - Colored section */}
             <div className="hidden md:flex md:w-1/2 bg-emerald-600 flex-col justify-center items-center text-white p-10">
                 <h1 className="text-4xl font-bold mb-6">Welcome Back!</h1>

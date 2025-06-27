@@ -86,7 +86,8 @@ const Register = () => {
     };
 
     return (
-        <div className="flex min-h-screen">
+
+        <div className="w-11/12 mx-auto flex rounded-lg shadow-lg overflow-hidden">
             {/* Left side - Colored section */}
             <div className="hidden md:flex md:w-1/2 bg-emerald-600 flex-col justify-center items-center text-white p-10">
                 <h1 className="text-4xl font-bold mb-6">Welcome to <br className='text-6xl font-bold mt-2' /> Plant Planet </h1>
@@ -102,7 +103,7 @@ const Register = () => {
                         <p className="text-gray-600">Fill in the details to get started</p>
                     </div>
 
-                    <form onSubmit={handleRegister} className="space-y-6">
+                    <form onSubmit={handleRegister} className="space-y-2">
                         {/* Name field */}
                         <div>
                             <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>

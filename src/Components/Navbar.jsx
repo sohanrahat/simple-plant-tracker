@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router';
 import { AuthContext } from '../Context/AuthProvider';
 import { useTheme } from '../Context/ThemeContext';
-import logo from '../assets/logo3.png';
 
 const Navbar = () => {
     const { user, loading, logOut } = useContext(AuthContext);
@@ -21,8 +20,8 @@ const Navbar = () => {
     const defaultAvatar = "https://i.ibb.co/MBtjqXQ/no-avatar.gif";
 
     return (
-        <div>
-            <div className={`navbar shadow-sm ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-green-100'}`}>
+        <div className="w-full flex justify-center my-4">
+            <div className="navbar shadow-lg w-11/12 mx-auto rounded-xl bg-gradient-to-r from-green-800 to-green-600 text-white">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -31,37 +30,36 @@ const Navbar = () => {
                             </svg>
                         </div>
                         <ul tabIndex={0}
-                            className={`menu menu-sm dropdown-content rounded-box z-1 mt-3 w-52 p-2 shadow ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-green-100'
-                                }`}>
-                            <li><NavLink to='/' className={({ isActive }) => isActive ? 'active' : ''}>Home</NavLink></li>
-                            <li><NavLink to='/all-plants' className={({ isActive }) => isActive ? 'active' : ''}>All Plants</NavLink></li>
-                            <li><NavLink to='/about-us' className={({ isActive }) => isActive ? 'active' : ''}>About Us</NavLink></li>
+                            className="menu menu-sm dropdown-content rounded-box z-10 mt-3 w-52 p-2 shadow bg-gradient-to-r from-green-800 to-green-700 text-white">
+                            <li><NavLink to='/' className={({ isActive }) => isActive ? 'bg-white/20 rounded-md' : ''}>Home</NavLink></li>
+                            <li><NavLink to='/all-plants' className={({ isActive }) => isActive ? 'bg-white/20 rounded-md' : ''}>All Plants</NavLink></li>
+                            <li><NavLink to='/about-us' className={({ isActive }) => isActive ? 'bg-white/20 rounded-md' : ''}>About Us</NavLink></li>
                             {user && <>
-                                <li><NavLink to='/add-plant' className={({ isActive }) => isActive ? 'active' : ''}>Add a Plant</NavLink></li>
-                                <li><NavLink to='/my-plants' className={({ isActive }) => isActive ? 'active' : ''}>My Plants</NavLink></li>
+                                <li><NavLink to='/add-plant' className={({ isActive }) => isActive ? 'bg-white/20 rounded-md' : ''}>Add a Plant</NavLink></li>
+                                <li><NavLink to='/my-plants' className={({ isActive }) => isActive ? 'bg-white/20 rounded-md' : ''}>My Plants</NavLink></li>
                             </>}
                         </ul>
                     </div>
-                    <Link to='/' className="btn btn-ghost text-xl normal-case">
-                        <img src={logo} alt="Plant Planet Logo" className="h-8 w-auto" />
-                        <span className="hidden sm:inline">Plant Planet</span>
-                    </Link>
+
+
+                    <Link to='/' className="hidden sm:inline p-2">Plant Planet</Link>
+
                 </div>
                 <div className="navbar-center hidden lg:flex justify-center gap-2">
                     <ul className="menu menu-horizontal px-1">
-                        <li><NavLink to='/' className={({ isActive }) => isActive ? 'active' : ''}>Home</NavLink></li>
-                        <li><NavLink to='/all-plants' className={({ isActive }) => isActive ? 'active' : ''}>All Plants</NavLink></li>
-                        <li><NavLink to='/about-us' className={({ isActive }) => isActive ? 'active' : ''}>About Us</NavLink></li>
+                        <li><NavLink to='/' className={({ isActive }) => isActive ? 'bg-white/20 rounded-md' : ''}>Home</NavLink></li>
+                        <li><NavLink to='/all-plants' className={({ isActive }) => isActive ? 'bg-white/20 rounded-md' : ''}>All Plants</NavLink></li>
+                        <li><NavLink to='/about-us' className={({ isActive }) => isActive ? 'bg-white/20 rounded-md' : ''}>About Us</NavLink></li>
                         {user && <>
-                            <li><NavLink to='/add-plant' className={({ isActive }) => isActive ? 'active' : ''}>Add a Plant</NavLink></li>
-                            <li><NavLink to='/my-plants' className={({ isActive }) => isActive ? 'active' : ''}>My Plants</NavLink></li>
+                            <li><NavLink to='/add-plant' className={({ isActive }) => isActive ? 'bg-white/20 rounded-md' : ''}>Add a Plant</NavLink></li>
+                            <li><NavLink to='/my-plants' className={({ isActive }) => isActive ? 'bg-white/20 rounded-md' : ''}>My Plants</NavLink></li>
                         </>}
                     </ul>
                 </div>
                 <div className="navbar-end gap-2">
                     <button
                         onClick={toggleTheme}
-                        className={`btn btn-circle ${isDarkMode ? 'btn-ghost text-yellow-500' : 'btn-ghost text-gray-600'}`}
+                        className="btn btn-ghost btn-circle text-yellow-400"
                     >
                         {isDarkMode ? (
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -89,12 +87,12 @@ const Navbar = () => {
                                     </div>
                                 </div>
                             </div>
-                            <button onClick={handleLogout} className={`btn ${isDarkMode ? 'btn-ghost text-white' : ''}`}>Logout</button>
+                            <button onClick={handleLogout} className="btn btn-ghost">Logout</button>
                         </div>
                     ) : (
                         <>
-                            <Link to='/login' className={`btn ${isDarkMode ? 'btn-ghost text-white' : ''}`}>Login</Link>
-                            <Link to='/Register' className={`btn ${isDarkMode ? 'btn-ghost text-white' : ''}`}>Register</Link>
+                            <Link to='/login' className="btn btn-ghost">Login</Link>
+                            <Link to='/Register' className="btn btn-ghost">Register</Link>
                         </>
                     )}
                 </div>
