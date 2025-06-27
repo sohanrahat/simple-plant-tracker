@@ -65,7 +65,7 @@ const MyPlants = () => {
                     <ImSpinner9 className={`animate-spin text-4xl ${isDarkMode ? 'text-green-400' : 'text-green-600'}`} />
                 </div>
             ) : myPlants.length > 0 ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {myPlants.map(plant => (
                         <div key={plant._id} className={`card shadow-xl ${isDarkMode ? 'bg-gray-800' : 'bg-base-100'}`}>
                             <figure className="h-48 overflow-hidden">
