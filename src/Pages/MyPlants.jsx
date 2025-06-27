@@ -67,43 +67,43 @@ const MyPlants = () => {
             ) : myPlants.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {myPlants.map(plant => (
-                        <div key={plant._id} className={`card shadow-xl ${isDarkMode ? 'bg-gray-800' : 'bg-base-100'}`}>
-                            <figure className="h-48 overflow-hidden">
-                                <img src={plant.image} alt={plant.plantName} className="w-full object-cover" />
-                            </figure>
-                            <div className="card-body">
-                                <h2 className={`card-title ${isDarkMode ? 'text-white' : ''}`}>{plant.plantName}</h2>
-                                <p className={`capitalize ${isDarkMode ? 'text-gray-300' : ''}`}>
-                                    <span className={`font-semibold ${isDarkMode ? 'text-gray-200' : ''}`}>Category:</span> {plant.category}
-                                </p>
-                                <p className={isDarkMode ? 'text-gray-300' : ''}>
-                                    <span className={`font-semibold ${isDarkMode ? 'text-gray-200' : ''}`}>Watering:</span> {plant.wateringFrequency}
-                                </p>
-                                <p className="flex items-center gap-2">
-                                    <span className={`font-semibold ${isDarkMode ? 'text-gray-200' : ''}`}>Care Level:</span>
-                                    <span className={`px-2 py-1 rounded-full text-xs ${plant.careLevel === 'easy'
-                                        ? isDarkMode ? 'bg-green-900 text-green-300' : 'bg-green-100 text-green-800'
-                                        : plant.careLevel === 'moderate'
-                                            ? isDarkMode ? 'bg-yellow-900 text-yellow-300' : 'bg-yellow-100 text-yellow-800'
-                                            : isDarkMode ? 'bg-red-900 text-red-300' : 'bg-red-100 text-red-800'
-                                        }`}>
-                                        {plant.careLevel}
-                                    </span>
-                                </p>
-                                <div className="card-actions justify-end mt-4">
-                                    <Link
-                                        to={`/dashboard/update-plant/${plant._id}`}
-                                        className={`btn btn-sm text-white ${isDarkMode ? 'bg-blue-700 hover:bg-blue-600' : 'bg-blue-600 hover:bg-blue-700'}`}
-                                    >
-                                        <FaEdit className="mr-1" /> Update
-                                    </Link>
-                                    <button
-                                        onClick={() => handleDelete(plant._id)}
-                                        className={`btn btn-sm text-white ${isDarkMode ? 'bg-red-700 hover:bg-red-600' : 'bg-red-600 hover:bg-red-700'}`}
-                                    >
-                                        <FaTrashAlt className="mr-1" /> Delete
-                                    </button>
+                        <div key={plant._id} className={`relative group border rounded-lg overflow-hidden transition-shadow hover:shadow-lg ${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+                            <Link to={`/plant-details/${plant._id}`} className="block cursor-pointer">
+                                <figure className="h-48">
+                                    <img src={plant.image} alt={plant.plantName} className="w-full h-full object-cover" />
+                                </figure>
+                                <div className="p-4">
+                                    <div className="flex justify-between items-start">
+                                        <h2 className={`text-lg font-semibold truncate ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>{plant.plantName}</h2>
+                                        <span className={`capitalize px-2 py-1 rounded-full text-xs font-medium ${plant.careLevel === 'easy'
+                                            ? isDarkMode ? 'bg-green-900 text-green-300' : 'bg-green-100 text-green-800'
+                                            : plant.careLevel === 'moderate'
+                                                ? isDarkMode ? 'bg-yellow-900 text-yellow-300' : 'bg-yellow-100 text-yellow-800'
+                                                : isDarkMode ? 'bg-red-900 text-red-300' : 'bg-red-100 text-red-800'
+                                            }`}>
+                                            {plant.careLevel}
+                                        </span>
+                                    </div>
+                                    <p className={`text-sm capitalize mt-1 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                                        {plant.category}
+                                    </p>
                                 </div>
+                            </Link>
+                            <div className="absolute top-2 right-2 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <Link
+                                    to={`/dashboard/update-plant/${plant._id}`}
+                                    className={`btn btn-circle btn-sm ${isDarkMode ? 'bg-gray-700 text-white hover:bg-gray-600' : 'bg-white text-gray-700 hover:bg-gray-100'}`}
+                                    title="Update Plant"
+                                >
+                                    <FaEdit />
+                                </Link>
+                                <button
+                                    onClick={() => handleDelete(plant._id)}
+                                    className={`btn btn-circle btn-sm ${isDarkMode ? 'bg-red-600 text-white hover:bg-red-700' : 'bg-red-500 text-white hover:bg-red-600'}`}
+                                    title="Delete Plant"
+                                >
+                                    <FaTrashAlt />
+                                </button>
                             </div>
                         </div>
                     ))}
