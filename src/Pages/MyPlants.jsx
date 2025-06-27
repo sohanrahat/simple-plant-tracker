@@ -92,7 +92,7 @@ const MyPlants = () => {
                                 </p>
                                 <div className="card-actions justify-end mt-4">
                                     <Link
-                                        to={`/update-plant/${plant._id}`}
+                                        to={`/dashboard/update-plant/${plant._id}`}
                                         className={`btn btn-sm text-white ${isDarkMode ? 'bg-blue-700 hover:bg-blue-600' : 'bg-blue-600 hover:bg-blue-700'}`}
                                     >
                                         <FaEdit className="mr-1" /> Update
@@ -111,7 +111,7 @@ const MyPlants = () => {
             ) : (
                 <div className="text-center py-10">
                     <p className={isDarkMode ? 'text-gray-400 mb-4' : 'text-gray-500 mb-4'}>You haven't added any plants yet</p>
-                    <Link to="/add-plant" className={`btn text-white ${isDarkMode ? 'bg-green-700 hover:bg-green-600' : 'bg-green-600 hover:bg-green-700'}`}>
+                    <Link to="/dashboard/add-plant" className={`btn text-white ${isDarkMode ? 'bg-green-700 hover:bg-green-600' : 'bg-green-600 hover:bg-green-700'}`}>
                         Add Your First Plant
                     </Link>
                 </div>

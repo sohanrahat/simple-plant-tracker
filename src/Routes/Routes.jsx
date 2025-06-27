@@ -11,6 +11,7 @@ import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import PrivateRoute from "../Context/PrivateRoute";
 import AuthLayout from "../Layout/AuthLayout";
+import DashboardLayout from "../Dashboard/DashLayout";
 import AboutUs from "../Pages/AboutUs";
 
 
@@ -39,20 +40,6 @@ const router = createBrowserRouter([
                 loader: ({ params }) => fetch(`https://ten-mango-server.vercel.app/plants/${params.id}`),
                 element: <PlantDetails />
             },
-            {
-                path: "/my-plants",
-                loader: () => fetch('https://ten-mango-server.vercel.app/plants'),
-                element: <PrivateRoute><MyPlants /></PrivateRoute>
-            },
-            {
-                path: "/add-plant",
-                element: <PrivateRoute><AddPlant /></PrivateRoute>
-            },
-            {
-                path: "/update-plant/:id",
-                loader: ({ params }) => fetch(`https://ten-mango-server.vercel.app/plants/${params.id}`),
-                element: <PrivateRoute><UpdatePlant /></PrivateRoute>
-            },
         ]
 
     },
@@ -66,6 +53,34 @@ const router = createBrowserRouter([
             {
                 path: "/register",
                 element: <Register />
+            }
+        ]
+    },
+    {
+        path: "/dashboard",
+        element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
+        children: [
+            {
+                path: "my-plants", // /dashboard/my-plants
+                loader: () => fetch('https://ten-mango-server.vercel.app/plants'),
+                element: <MyPlants />
+            },
+            {
+                path: "add-plant", // /dashboard/add-plant
+                element: <AddPlant />
+            },
+            {
+                path: "update-plant/:id", // /dashboard/update-plant/:id
+                loader: ({ params }) => fetch(`https://ten-mango-server.vercel.app/plants/${params.id}`),
+                element: <UpdatePlant />
+            },
+            {
+                path: "add-product", // /dashboard/add-product
+                element: <div>Add Product Page (Placeholder)</div> // Replace with actual component
+            },
+            {
+                path: "my-products", // /dashboard/my-products
+                element: <div>My Products Page (Placeholder)</div> // Replace with actual component
             }
         ]
     }

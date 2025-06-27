@@ -41,7 +41,7 @@ const AddPlant = () => {
     };
 
     return (
-        <div className={`max-w-4xl my-3 mx-auto p-6 ${isDarkMode ? 'bg-gray-800' : 'bg-green-50'}`}>
+        <div className={`max-w-4xl mx-auto ${isDarkMode ? 'bg-gray-800' : 'bg-green-50'}`}>
             <h2 className={`text-3xl font-bold text-center mb-8 ${isDarkMode ? 'text-green-400' : 'text-green-800'}`}>Add a New Plant</h2>
 
             <form onSubmit={handleAddPlant} className={`space-y-6 p-8 rounded-lg shadow-md border-2 ${isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-green-200'

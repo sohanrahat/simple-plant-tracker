@@ -3,6 +3,9 @@ import { Link, NavLink } from 'react-router';
 import { AuthContext } from '../Context/AuthProvider';
 import { useTheme } from '../Context/ThemeContext';
 
+// Helper function to avoid repeating the className logic for NavLinks.
+const navLinkClasses = ({ isActive }) => isActive ? 'bg-white/20 rounded-md' : '';
+
 const Navbar = () => {
     const { user, loading, logOut } = useContext(AuthContext);
     const { isDarkMode, toggleTheme } = useTheme();
@@ -31,13 +34,10 @@ const Navbar = () => {
                         </div>
                         <ul tabIndex={0}
                             className="menu menu-sm dropdown-content rounded-box z-10 mt-3 w-52 p-2 shadow bg-gradient-to-r from-green-800 to-green-700 text-white">
-                            <li><NavLink to='/' className={({ isActive }) => isActive ? 'bg-white/20 rounded-md' : ''}>Home</NavLink></li>
-                            <li><NavLink to='/all-plants' className={({ isActive }) => isActive ? 'bg-white/20 rounded-md' : ''}>All Plants</NavLink></li>
-                            <li><NavLink to='/about-us' className={({ isActive }) => isActive ? 'bg-white/20 rounded-md' : ''}>About Us</NavLink></li>
-                            {user && <>
-                                <li><NavLink to='/add-plant' className={({ isActive }) => isActive ? 'bg-white/20 rounded-md' : ''}>Add a Plant</NavLink></li>
-                                <li><NavLink to='/my-plants' className={({ isActive }) => isActive ? 'bg-white/20 rounded-md' : ''}>My Plants</NavLink></li>
-                            </>}
+                            <li><NavLink to='/' className={navLinkClasses}>Home</NavLink></li>
+                            <li><NavLink to='/all-plants' className={navLinkClasses}>All Plants</NavLink></li>
+                            <li><NavLink to='/about-us' className={navLinkClasses}>About Us</NavLink></li>
+                            {user && <li><NavLink to='/dashboard/my-plants' className={navLinkClasses}>Dashboard</NavLink></li>}
                         </ul>
                     </div>
 
@@ -47,13 +47,10 @@ const Navbar = () => {
                 </div>
                 <div className="navbar-center hidden lg:flex justify-center gap-2">
                     <ul className="menu menu-horizontal px-1">
-                        <li><NavLink to='/' className={({ isActive }) => isActive ? 'bg-white/20 rounded-md' : ''}>Home</NavLink></li>
-                        <li><NavLink to='/all-plants' className={({ isActive }) => isActive ? 'bg-white/20 rounded-md' : ''}>All Plants</NavLink></li>
-                        <li><NavLink to='/about-us' className={({ isActive }) => isActive ? 'bg-white/20 rounded-md' : ''}>About Us</NavLink></li>
-                        {user && <>
-                            <li><NavLink to='/add-plant' className={({ isActive }) => isActive ? 'bg-white/20 rounded-md' : ''}>Add a Plant</NavLink></li>
-                            <li><NavLink to='/my-plants' className={({ isActive }) => isActive ? 'bg-white/20 rounded-md' : ''}>My Plants</NavLink></li>
-                        </>}
+                        <li><NavLink to='/' className={navLinkClasses}>Home</NavLink></li>
+                        <li><NavLink to='/all-plants' className={navLinkClasses}>All Plants</NavLink></li>
+                        <li><NavLink to='/about-us' className={navLinkClasses}>About Us</NavLink></li>
+                        {user && <li><NavLink to='/dashboard/my-plants' className={navLinkClasses}>Dashboard</NavLink></li>}
                     </ul>
                 </div>
                 <div className="navbar-end gap-2">
