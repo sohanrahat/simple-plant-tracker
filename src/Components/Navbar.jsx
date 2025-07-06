@@ -2,9 +2,10 @@ import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router';
 import { AuthContext } from '../Context/AuthProvider';
 import { useTheme } from '../Context/ThemeContext';
+import logo from '../assets/plantplanet.png';
 
 // Helper function to avoid repeating the className logic for NavLinks.
-const navLinkClasses = ({ isActive }) => isActive ? 'bg-white/20 rounded-md' : '';
+const navLinkClasses = ({ isActive }) => isActive ? 'font-bold' : '';
 
 const Navbar = () => {
     const { user, loading, logOut } = useContext(AuthContext);
@@ -23,8 +24,8 @@ const Navbar = () => {
     const defaultAvatar = "https://i.ibb.co/MBtjqXQ/no-avatar.gif";
 
     return (
-        <div className="w-full flex justify-center my-4">
-            <div className="navbar shadow-lg w-11/12 mx-auto rounded-xl bg-gradient-to-r from-green-800 to-green-600 text-white">
+        <div className={`navbar shadow-sm ${isDarkMode ? 'bg-emerald-900/20' : 'bg-emerald-50'}`}>
+            <div className="w-11/12 mx-auto navbar">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -33,30 +34,35 @@ const Navbar = () => {
                             </svg>
                         </div>
                         <ul tabIndex={0}
-                            className="menu menu-sm dropdown-content rounded-box z-10 mt-3 w-52 p-2 shadow bg-gradient-to-r from-green-800 to-green-700 text-white">
-                            <li><NavLink to='/' className={navLinkClasses}>Home</NavLink></li>
+                            className="menu menu-sm dropdown-content rounded-box z-1 mt-3 w-52 p-2 shadow bg-base-100">
                             <li><NavLink to='/all-plants' className={navLinkClasses}>All Plants</NavLink></li>
                             <li><NavLink to='/about-us' className={navLinkClasses}>About Us</NavLink></li>
-                            {user && <li><NavLink to='/dashboard/my-plants' className={navLinkClasses}>Dashboard</NavLink></li>}
+                            {user && (
+                                <li><NavLink to='/dashboard' className={navLinkClasses}>Dashboard</NavLink></li>
+                            )}
                         </ul>
                     </div>
 
 
-                    <Link to='/' className="hidden sm:inline p-2">Plant Planet</Link>
+                    <Link to='/' className="flex items-center gap-2 text-xl font-semibold">
+                        <img src={logo} alt="Plant Planet" className="h-8 w-8" />
+                        Plant Planet
+                    </Link>
 
                 </div>
-                <div className="navbar-center hidden lg:flex justify-center gap-2">
+                <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
-                        <li><NavLink to='/' className={navLinkClasses}>Home</NavLink></li>
                         <li><NavLink to='/all-plants' className={navLinkClasses}>All Plants</NavLink></li>
                         <li><NavLink to='/about-us' className={navLinkClasses}>About Us</NavLink></li>
-                        {user && <li><NavLink to='/dashboard/my-plants' className={navLinkClasses}>Dashboard</NavLink></li>}
+                        {user && (
+                            <li><NavLink to='/dashboard' className={navLinkClasses}>Dashboard</NavLink></li>
+                        )}
                     </ul>
                 </div>
-                <div className="navbar-end gap-2">
+                <div className="navbar-end">
                     <button
                         onClick={toggleTheme}
-                        className="btn btn-ghost btn-circle text-yellow-400"
+                        className="p-2 text-yellow-400 mr-3"
                     >
                         {isDarkMode ? (
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -84,12 +90,12 @@ const Navbar = () => {
                                     </div>
                                 </div>
                             </div>
-                            <button onClick={handleLogout} className="btn btn-ghost">Logout</button>
+                            <button onClick={handleLogout} className="text-sm">Logout</button>
                         </div>
                     ) : (
                         <>
-                            <Link to='/login' className="btn btn-ghost">Login</Link>
-                            <Link to='/Register' className="btn btn-ghost">Register</Link>
+                            <Link to='/login' className="btn bg-emerald-600 hover:bg-emerald-700 text-white">Login</Link>
+                            <Link to='/Register' className="btn bg-emerald-500 hover:bg-emerald-600 text-white">Register</Link>
                         </>
                     )}
                 </div>
