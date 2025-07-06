@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router';
 import { AuthContext } from '../Context/AuthProvider';
 import Swal from 'sweetalert2';
+import loginimage from '../assets/LoginPageImage.jpg';
 
 const Login = () => {
     const { signIn, signInWithGoogle } = useContext(AuthContext);
@@ -101,11 +102,13 @@ const Login = () => {
         // This container creates a card-like effect for the login page,
         // centered within the AuthLayout. The min-h-screen is removed
         // to prevent layout issues with the sticky Navbar.
-        <div className="w-11/12 mx-auto flex my-10 rounded-lg shadow-lg overflow-hidden">
-            {/* Left side - Colored section */}
-            <div className="hidden md:flex md:w-1/2 bg-emerald-600 flex-col justify-center items-center text-white p-10">
-                <h1 className="text-4xl font-bold mb-6">Welcome Back!</h1>
-                <p className="text-xl mb-8">Sign in to your Plant Planet Account</p>
+        <div className="w-full flex min-h-screen shadow-lg overflow-hidden">
+            {/* Left side - Image with overlay */}
+            <div className="hidden md:flex md:w-1/2 relative" style={{backgroundImage: `url(${loginimage})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
+                <div className="absolute inset-0 bg-black/30 flex flex-col justify-center items-center text-white p-10">
+                    <h1 className="text-4xl font-bold mb-6">Welcome Back!</h1>
+                    <p className="text-xl mb-8">Sign in to your Plant Planet Account</p>
+                </div>
             </div>
 
             {/* Right side - Login form */}

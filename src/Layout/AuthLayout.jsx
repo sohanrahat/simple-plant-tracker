@@ -19,7 +19,6 @@ const AuthLayout = () => {
     }, [isDarkMode]);
 
     return (
-
         <div className="min-h-screen">
             <Navbar />
             <Outlet />

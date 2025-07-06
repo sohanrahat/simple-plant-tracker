@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../Context/AuthProvider';
 import { getAuth, signOut } from 'firebase/auth';
 import Swal from 'sweetalert2';
+import registerimage from '../assets/RegisterPageImage.jpg';
 
 const Register = () => {
     const { createUser } = useContext(AuthContext);
@@ -87,12 +88,13 @@ const Register = () => {
 
     return (
 
-        <div className="w-11/12 mx-auto flex rounded-lg shadow-lg overflow-hidden">
-            {/* Left side - Colored section */}
-            <div className="hidden md:flex md:w-1/2 bg-emerald-600 flex-col justify-center items-center text-white p-10">
-                <h1 className="text-4xl font-bold mb-6">Welcome to <br className='text-6xl font-bold mt-2' /> Plant Planet </h1>
-                <p className="text-xl mb-8">Join our community today!</p>
-
+        <div className="w-full flex min-h-screen shadow-lg overflow-hidden">
+            {/* Left side - Image with overlay */}
+            <div className="hidden md:flex md:w-1/2 relative" style={{backgroundImage: `url(${registerimage})`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
+                <div className="absolute inset-0 bg-black/30 flex flex-col justify-center items-center text-white p-10">
+                    <h1 className="text-4xl font-bold mb-6">Welcome to Plant Planet</h1>
+                    <p className="text-xl mb-8">Join our community today!</p>
+                </div>
             </div>
 
             {/* Right side - Registration form */}
